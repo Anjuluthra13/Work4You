@@ -9,6 +9,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
  
 }
 
@@ -1109,7 +1110,7 @@ ul li ul.dropdown li{
   }
 
   div.background9{
-    background: url("../src/imagesmall2/banner11.jpg");
+    background: url("../src/imagesmall2/banner.jpg");
     opacity: 1;
     background-repeat: no-repeat;
     background-size: cover;

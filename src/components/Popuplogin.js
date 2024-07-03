@@ -15,9 +15,7 @@ const Popuplogin = () => {
     <>
 
 
-      <button type="button" className="" data-bs-toggle="modal" data-bs-target="#exampleModal" style={{width:"0rem",background:"#121212"}}>
       
-      </button>
 
       <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog modal-fullscreen">

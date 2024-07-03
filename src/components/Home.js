@@ -121,12 +121,12 @@ const Home = () => {
 
 
       <br></br>
-      <br></br>
-
-      <br></br>
 
 
-      <Carousel fade className='rowv5 ' style={{ marginTop: "3rem", marginBottom: "2rem" }}>
+
+
+
+      {/* <Carousel fade className='rowv5 ' style={{ marginTop: "3rem", marginBottom: "2rem" }}>
 
         <Carousel.Item interval={1000}>
           <div className='d-flex rowv5'>
@@ -216,7 +216,7 @@ const Home = () => {
 
           </div>
         </Carousel.Item>
-      </Carousel>
+      </Carousel> */}
 
 
       <div className='container card-8'>
