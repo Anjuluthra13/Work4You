@@ -1,31 +1,28 @@
-// const jwt = require('jsonwebtoken');
-// const mongooose = require('mongoose');
-// const bcrypt = require('bcryptjs');
-// const { Col } = require('react-bootstrap');
+const jwt = require('jsonwebtoken');
+const mongooose = require('mongoose');
+const bcrypt = require('bcryptjs');
+const { Col } = require('react-bootstrap');
 
-// const userAdmin = new mongooose.Schema({
+const userAdmin = new mongooose.Schema({
 
  
 
-//     email: {
-//         type: String,
+    email: {
+        type: String,
     
-//     },
-//     password: {
-//         type: String,
+    },
+    password: {
+        type: String,
       
-//     },
-//     cpassword: {
-//         type: String,
+    },
+    cpassword: {
+        type: String,
       
-//     },
+    },
    
-// })
+})
 
-// // hashing the password 
+// hashing the password 
 
-
-
-
-// const Admin = mongooose.model('admin', userAdmin);
-// module.exports = Admin;
+const Admin = mongooose.model('admin', userAdmin);
+module.exports = Admin;

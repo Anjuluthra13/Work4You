@@ -115,9 +115,6 @@ const Smallcard = () => {
                 <div className='col-lg-2 col-xl-2 col-md-4 col-sm-6 '>
 
                 </div>
-
-
-
             </div>
 
 

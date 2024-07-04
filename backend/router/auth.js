@@ -580,36 +580,36 @@ router.post('/create-order', authenticate, async (req, res) => {
 
 
 
-// router.post('/pay-order',authenticate, async (req, res) => {
+router.post('/pay-order',authenticate, async (req, res) => {
 
-//     try {
+    try {
 
-//         const { amount, razorpayPaymentId, razorpayOrderId, razorpaySignature } = req.body;
-//         console.log(amount);
-//         console.log(razorpayPaymentId);
-//         console.log(razorpayOrderId);
-//         console.log(razorpaySignature);
+        const { amount, razorpayPaymentId, razorpayOrderId, razorpaySignature } = req.body;
+        console.log(amount);
+        console.log(razorpayPaymentId);
+        console.log(razorpayOrderId);
+        console.log(razorpaySignature);
 
-//         if (!amount || !razorpayPaymentId || !razorpayOrderId || !razorpaySignature) {
-//             console.log("error in contact form");
-//             res.json({ error: "plz filled the contact form" });
-//         }
+        if (!amount || !razorpayPaymentId || !razorpayOrderId || !razorpaySignature) {
+            console.log("error in contact form");
+            res.json({ error: "plz filled the contact form" });
+        }
 
-//         const userText = await User.findOne({ _id: req.userID });
+        const userText = await User.findOne({ _id: req.userID });
 
-//         if (userText) {
-//             const userPayment = await userText.addPayment(amount, razorpayPaymentId, razorpayOrderId, razorpaySignature);
-//             await userText.save();
+        if (userText) {
+            const userPayment = await userText.addPayment(amount, razorpayPaymentId, razorpayOrderId, razorpaySignature);
+            await userText.save();
 
-//             res.status(201).json({ message: "payment backend succesfukky" });
-//         }
+            res.status(201).json({ message: "payment backend succesfukky" });
+        }
 
 
-//     } catch (error) {
-//         console.log(error);
-//         res.status(500).send(error);
-//     }
-// });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send(error);
+    }
+});
 
 
 router.post('/book-now', async (req, res) => {

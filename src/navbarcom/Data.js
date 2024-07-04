@@ -4,7 +4,7 @@ import image from '../imagesmall2/housekeeping.jpg'
 import image1 from '../imageforday/cook4.jpg'
 import image2 from '../imagesmall2/driver.jpg'
 import image3 from '../imagesmall2/babysitter3.jpg'
-import image4 from '../imagesmall2/images.jpg'
+import image4 from '../imagesmall2/painter.jpg'
 const data = {
 
     productData: [

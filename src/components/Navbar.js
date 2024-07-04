@@ -7,6 +7,8 @@ import image from "../image/work4youlogo.png"
 import { FaShoppingCart } from "react-icons/fa";
 import { AiFillDelete } from "react-icons/ai";
 import image2 from "../Imagesmall/maidimage.jpg"
+import './styles.css';
+import { FaSun, FaMoon } from 'react-icons/fa';
 
 import {
   Badge,
@@ -30,6 +32,7 @@ const Navbar = () => {
 
   const { state, dispatchs } = useContext(UserContext);
   const [userName, setUserName] = useState('');
+  const [theme, setTheme] = useState('light');
 
   const userHome = async () => {
     try {
@@ -55,11 +58,14 @@ const Navbar = () => {
   useEffect(() => {
     userHome();
   }, []);
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+    document.body.className = newTheme + '-theme';
+  };
+
   const RenderMenu = () => {
-
-
-   
-
     if (state) {
       return (
         <>
@@ -98,16 +104,27 @@ const Navbar = () => {
 
 
 
-      <nav className="navbar navbar-expand-lg navbar-dark nav2  " style={{ backgroundColor: "#121212", position: "fixed", top: "0", width: "100%", zIndex: "9999", fontFamily: "Poppins" }}>
-      
+<nav
+        className={`navbar navbar-expand-lg ${theme === 'dark' ? 'navbar-dark' : 'navbar-light'} nav2`}
+        style={{ position: 'fixed', top: '0', width: '100%', zIndex: '9999', fontFamily: 'Poppins' }}>
         <div className="container-fluid">
-          <Popuplogin/>
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <Popuplogin />
+          <button
+            className={`navbar-toggler ${theme === 'dark' ? 'text-light' : 'text-dark'}`}
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
-
+          <div id="google_translate_element"></div>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <Link to="/" className='margin2'><img src={image} alt='error' ></img></Link>
+            <Link to="/" className="margin2">
+              <img src={image} alt="error" />
+            </Link>
+
 
             <ul className="navbar-nav mx-auto mb-2 ">
 
@@ -155,7 +172,14 @@ const Navbar = () => {
 
 
             <form className="d-flex" >
-
+            <Button
+             className={`toggle ${theme === 'dark' ? 'text-light' : 'text-dark'}`}
+              variant="transparent"
+             onClick={toggleTheme}
+           style={{ marginRight: '1rem' }}
+>
+  {theme === 'dark' ? <FaSun color="#ffffff" /> : <FaMoon color="#000000" />}
+</Button>
             <Dropdown alignRight>
                 <Dropdown.Toggle variant="btn btn-primary  mr-5"  style={{width:"7rem" , marginRight:"1rem"}} >
                   <FaShoppingCart color="white" fontSize="25px" />

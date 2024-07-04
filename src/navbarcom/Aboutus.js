@@ -14,7 +14,7 @@ const Aboutus = () => {
     <>
       <div className='container ' style={{ width: "72%", marginTop: "-2rem" }}>
         <div className='row animated animatedFadeInUp fadeInUp'>
-          <center > <h2 style={{ color: "#121212", fontFamily: "Poppins" }}>WELCOME TO<span style={{ color: "#dbaf32" }}> RAZEJOBFINER.IN</span></h2></center>
+          <center > <h2 style={{ color: "#121212", fontFamily: "Poppins" }}>WELCOME TO<span style={{ color: "#dbaf32" }}> Work4You</span></h2></center>
           <br />
           <br />
           <br />
@@ -24,10 +24,7 @@ const Aboutus = () => {
             <h2 style={{ color: "#121212", fontFamily: "Poppins" }}>WHO ARE<span style={{ color: "#dbaf32" }}> WE?</span></h2>
             <br />
             <p style={{ color: "grey", fontFamily: "Poppins" }}>
-              RazeJobFinder, has been offering maid service in Kalyan-Dombivali . Being the best maid agency in Kalyan-Dombivali, we offer 24 hour maid service
-              across Indian cities. With us, you can find the right maid, domestic help, housemaids, cooks ,caretakers, ayaas, peons, nurses, ward boys,
-              babysitters , elderly caretakers , and any domestic help you are looking for. Through the experience of our Experts, RazeJobFinder helps
-              you find the staff as per your requirement. Using RazeJobFinder.com you will definitely find the best domestic helper to ease your life.
+            Work4You has been offering maid services in Delhi. As the best maid agency in Delhi, we provide 24-hour maid services across Indian cities. With us, you can find the right maid, domestic help, housemaids, cooks, caretakers, ayahs, peons, nurses, ward boys, babysitters, elderly caretakers, and any domestic help you need. Leveraging the expertise of our professionals, Work4You helps you find the staff that meets your specific requirements. With Work4You, you will definitely find the best domestic helper to ease your life.
 
             </p>
             <p style={{ color: "grey", fontFamily: "Poppins" }}>We are a private limited company, via our expert team of maids services staff assist people from India to find a solution for their home
@@ -52,12 +49,12 @@ const Aboutus = () => {
           <div className='col-md-6'>
             <h3 style={{ color: "#121212", fontFamily: "Poppins" }}>Why We Do<span style={{ color: "#dbaf32" }}> Business</span></h3>
             <p style={{ color: "grey", fontFamily: "Poppins" }}>
-              At RazeJobFinder, we intend to make lives easier by providing maid service in Kalyan-Dombivali. Finding domestic help was a hassle until RazeJobFinder was launched. We have helped thousands of help seekers find what they are looking for whether it be a maid, cook, domestic helper, nanny or nurse.</p>
+              At Work4You, we intend to make lives easier by providing maid service in Kalyan-Dombivali. Finding domestic help was a hassle until Work4You was launched. We have helped thousands of help seekers find what they are looking for whether it be a maid, cook, domestic helper, nanny or nurse.</p>
 
           </div>
           <div className='col-md-6'>
             <h3 style={{ color: "#121212", fontFamily: "Poppins" }}>How We <span style={{ color: "#dbaf32" }}>Do It</span></h3>
-            <p style={{ color: "grey", fontFamily: "Poppins" }}>With years of experience and trust, RazeJobFinder.com is now recognized as a reliable and dependable maid agency in Kalyan-Dombivali. Using design thinking as a business tool, we create environments, products and services at democratic prices that awe, inspire people and lift them out of the everyday into a happy and creative mental world.</p>
+            <p style={{ color: "grey", fontFamily: "Poppins" }}>With years of experience and trust, Work4You is now recognized as a reliable and dependable maid agency in Kalyan-Dombivali. Using design thinking as a business tool, we create environments, products and services at democratic prices that awe, inspire people and lift them out of the everyday into a happy and creative mental world.</p>
 
           </div>
         </div>
@@ -100,7 +97,7 @@ const Aboutus = () => {
         </div>
       </div>
       <div className="container" style={{ marginBottom: "4rem" }}>
-        <p classname="maps" style={{ width: "102.6%", height: "20rem", border: "0", allowfullscreen: "", loading: "lazy" }}><iframe style={{ width: "101%", height: "27rem", border: "0", allowfullscreen: "", loading: "lazy" }} src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4229.063075291826!2d73.13154841324223!3d19.209752753873097!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be795efeb3d38eb%3A0x8d8b68aab4d64d6d!2sAuxilum%20hospital!5e0!3m2!1sen!2sin!4v1644228214354!5m2!1sen!2sin" ></iframe></p>
+        <p classname="maps" style={{ width: "102.6%", height: "20rem", border: "0", allowfullscreen: "", loading: "lazy" }}><iframe style={{ width: "101%", height: "27rem", border: "0", allowfullscreen: "", loading: "lazy" }} src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.31424593928!2d77.30662918267458!3d28.59034811300048!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce4f48ccfdc81%3A0x23b82756bfac9089!2sNational%20Skill%20Training%20Institute%20for%20Women!5e0!3m2!1sen!2sin!4v1720078999928!5m2!1sen!2sin" ></iframe></p>
       </div>
 
     </>

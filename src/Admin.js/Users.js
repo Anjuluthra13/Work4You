@@ -1,25 +1,14 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import Navbarhori from './Navbarhori'
-
-import { useEffect, useState, useContext } from 'react'
-import { deldata } from '../reducer/ContextProvider';
-import { updatedata } from '../reducer/ContextProvider'
+import React, { useEffect, useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
+import Navbarhori from './Navbarhori';
+import { deldata, updatedata } from '../reducer/ContextProvider';
 
 const Users = () => {
-
-
     const [getuserdata, setUserdata] = useState([]);
-
-
-    const { updata, setUPdata } = useContext(updatedata);
+    const { updata } = useContext(updatedata);
     const { dltdata, setDLTdata } = useContext(deldata);
 
-    console.log(getuserdata);
-
-
     const getdata = async () => {
-
         const res = await fetch("/users", {
             method: "GET",
             headers: {
@@ -28,25 +17,19 @@ const Users = () => {
         });
 
         const data = await res.json();
-        console.log(data);
-
         if (res.status === 422 || !data) {
             console.log("error ");
-
         } else {
-            setUserdata(data)
+            setUserdata(data);
             console.log("get data");
-
         }
-    }
+    };
 
     useEffect(() => {
         getdata();
-    }, [])
-
+    }, []);
 
     const deleteuser = async (id) => {
-
         const res2 = await fetch(`/deleteuser/${id}`, {
             method: "DELETE",
             headers: {
@@ -55,17 +38,14 @@ const Users = () => {
         });
 
         const deletedata = await res2.json();
-       
-         window.location.reload();   
         if (res2.status === 422 || !deletedata) {
             console.log("error");
         } else {
             console.log("user deleted");
-            setDLTdata(deletedata)
+            setDLTdata(deletedata);
             getdata();
         }
-
-    }
+    };
 
     return (
 
@@ -90,10 +70,6 @@ const Users = () => {
                         </div>
                     </> : ""
             }
-
-
-
-
 
             <div className='container ' style={{ fontFamily: "Poppins" }}>
                 <div className='row ' style={{ width: "100%", marginTop: "-3.2rem" }}>

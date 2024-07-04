@@ -105,7 +105,7 @@ const Touch = () => {
                         <i className="fa fa-phone-square  fa-2x left1  " />
                         <div style={{ display: "block" }}>
                             <h5>Phone No</h5>
-                            <p style={{ fontSize: "13px", color: "#121212"  }}>+91844540-58844</p>
+                            <p style={{ fontSize: "13px", color: "#121212"  }}>+918595957070</p>
                         </div>
 
                     </div>
@@ -113,7 +113,7 @@ const Touch = () => {
                         <i className="far fa-envelope fa-2x left1"></i>
                         <div style={{ display: "block" }} >
                             <h5>Email</h5>
-                            <p style={{ fontSize: "13px", color: "#121212"  }}>RazeJob@gmail.com</p>
+                            <p style={{ fontSize: "13px", color: "#121212"  }}>oak.work4you@gmail.com</p>
 
                         </div>
 
@@ -121,7 +121,7 @@ const Touch = () => {
                     <div className="col-sm small-box card-7">
                         <i className="fas fa-map-marker-alt fa-2x left1" ></i>
                         <h5>Location</h5>
-                        <p style={{ fontSize: "13px", color: "#121212"  }} >Kalyan, Maharashtra </p>
+                        <p style={{ fontSize: "13px", color: "#121212"  }} >D-1, Block D, Sector 1, Noida, <br></br>Uttar Pradesh 201301 </p>
                     </div>
                 </div>
             </div>

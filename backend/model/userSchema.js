@@ -40,50 +40,50 @@ const userSchema = new mongooose.Schema({
         default: Date.now
     },
 
-    // messages: [
-    //     {
-    //         name: {
-    //             type: String,
+    messages: [
+        {
+            name: {
+                type: String,
              
-    //         },
-    //         email: {
-    //             type: String,
+            },
+            email: {
+                type: String,
                
-    //         },
-    //         phone: {
-    //             type: Number,
+            },
+            phone: {
+                type: Number,
                
-    //         },
-    //         message: {
-    //             type: String,
+            },
+            message: {
+                type: String,
                 
-    //         }
+            }
 
-    //     }
+        }
 
-    // ],
-    // payments: [
-    //     {
-    //         amounts:{
-    //             type: Number,
+    ],
+    payments: [
+        {
+            amounts:{
+                type: Number,
             
-    //         },
-    //         paymentId: {
-    //             type: String,
+            },
+            paymentId: {
+                type: String,
              
-    //         },
-    //         orderId: {
-    //             type: String,
+            },
+            orderId: {
+                type: String,
              
-    //         },
-    //         signature: {
-    //             type: String,
+            },
+            signature: {
+                type: String,
            
-    //         }
+            }
 
-    //     }
+        }
 
-    // ],
+    ],
     tokens: [
         {
             token: {
@@ -92,16 +92,16 @@ const userSchema = new mongooose.Schema({
             }
         }
     ],
-    // addresss:[
+    addresss:[
 
-    //     {
+        {
 
-    //         address:{
-    //              type:String,
+            address:{
+                 type:String,
 
-    //         }
-    //     }
-    // ],
+            }
+        }
+    ],
    
 
 
@@ -134,42 +134,40 @@ userSchema.methods.generateAuthToken = async function () {
     }
 
 }
-//stored the message
-// userSchema.methods.addMessage = async function (name, email, phone, message) {
-//     try {
-//         this.messages = this.messages.concat({ name, email, phone, message })
-//         await this.save();
-//         return this.messages;
-//     } catch (error) {
-//         console.log(error)
-//     }
+// stored the message
+userSchema.methods.addMessage = async function (name, email, phone, message) {
+    try {
+        this.messages = this.messages.concat({ name, email, phone, message })
+        await this.save();
+        return this.messages;
+    } catch (error) {
+        console.log(error)
+    }
 
-// }
-// userSchema.methods.addPayment = async function (amounts, paymentId, orderId, signature) {
+}
+userSchema.methods.addPayment = async function (amounts, paymentId, orderId, signature) {
     
-//     try {
-//         this.payments = this.payments.concat({ amounts, paymentId, orderId, signature })
-//         await this.save();
-//         console.log(this.payments);
-//         return this.payments;
-//     } catch (error) {
-//         console.log(error)
-//     }
+    try {
+        this.payments = this.payments.concat({ amounts, paymentId, orderId, signature })
+        await this.save();
+        console.log(this.payments);
+        return this.payments;
+    } catch (error) {
+        console.log(error)
+    }
 
-// }
+}
 
-// userSchema.methods.addAddress = async function (address) {
-//     try {
-//         this.addresss = this.addresss.concat({ address})
-//         await this.save();
-//         return this.addresss;
-//     } catch (error) {
-//         console.log(error)
-//     }
+userSchema.methods.addAddress = async function (address) {
+    try {
+        this.addresss = this.addresss.concat({ address})
+        await this.save();
+        return this.addresss;
+    } catch (error) {
+        console.log(error)
+    }
 
-// }
-
-
+}
 
 const User = mongooose.model('USER', userSchema);
 module.exports = User;
