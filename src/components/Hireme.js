@@ -13,15 +13,17 @@ const Hireme = () => {
         name: "",
         id: "",
         email: "",
+        altEmail: "",  // New field for alternative email
         phone: "",
+        altPhone: "",  // New field for alternative phone
         amount: "",
-        state:"",
+        state: "",
         city: "",
         stime: "",
         date: "",
         etime: "",
         address: "",
-        service:"",
+        service: "",
     });
     const [total, setTotal] = useState();
     const [service, setService] = useState();
@@ -73,6 +75,14 @@ const Hireme = () => {
         setUserData({ ...userData, [name]: value });
     };
 
+    const convertDateTime = (date, time) => {
+        const [hours, minutes] = time.split(':');
+        const newDate = new Date(date);
+        newDate.setHours(hours);
+        newDate.setMinutes(minutes);
+        return newDate;
+    };
+
     const sendEmail = async (e) => {
         e.preventDefault();
         try {
@@ -90,21 +100,24 @@ const Hireme = () => {
 
     const submitData = async (event) => {
         event.preventDefault();
-        const { name, phone, email, amount, id, city,state, etime, stime, date, address, service } = userData;
+        const { name, phone, altPhone, email, altEmail, amount, id, city, state, etime, stime, date, address, service } = userData;
 
-        const res = await fetch('/delivery', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                name, phone, email, amount, id, city, state, stime, etime, date, address, service
-            })
-        });
-        const data = await res.json();
+        const startDateTime = convertDateTime(date, stime);
+        const endDateTime = convertDateTime(date, etime);
+        const currentDateTime = new Date();
 
-        if (!name || !id || !email || !phone || !amount || !city ||!state || !stime || !etime || !date || !address || !service) {
-            toast.error("Please Fill data", {
+        if (!name || !id || !email || !phone || !amount || !city || !state || !stime || !etime || !date || !address || !service) {
+            toast.error("Please fill in all required fields", {
+                position: "top-center",
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: 0,
+            });
+        } else if (startDateTime < currentDateTime || endDateTime < currentDateTime) {
+            toast.error("Date and time should not be before the current date and time", {
                 position: "top-center",
                 autoClose: 1000,
                 hideProgressBar: false,
@@ -114,7 +127,7 @@ const Hireme = () => {
                 progress: 0,
             });
         } else {
-            toast.success("Go forward", {
+            toast.success("Your booking has been submitted successfully", {
                 position: "top-center",
                 autoClose: 1000,
                 hideProgressBar: false,
@@ -125,7 +138,28 @@ const Hireme = () => {
             });
             setUserData({ ...userData });
             await sendEmail(event);
+
+            const res = await fetch('/delivery', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name, phone, altPhone, email, altEmail, amount, id, city, state, startDateTime: startDateTime.toISOString(), endDateTime: endDateTime.toISOString(), date, address, service
+                })
+            });
+            const data = await res.json();
         }
+    };
+
+    const getCurrentDateTime = () => {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        return `${year}-${month}-${day}T${hours}:${minutes}`;
     };
 
     return (
@@ -151,7 +185,7 @@ const Hireme = () => {
                                                     className="form-control card-5"
                                                     placeholder=""
                                                     value={userData.name}
-                                                    
+                                                    onChange={postUserData}
                                                 />
                                             </div>
                                             <div className="col-12 col-lg-4 contact-input-feild" style={{ marginTop: "-3rem", color: " ", fontWeight: "bold" }}>
@@ -173,7 +207,7 @@ const Hireme = () => {
                                                     className="form-control"
                                                     placeholder=""
                                                     value={[userData.state, userData.city]}
-                                                    
+                                                    onChange={postUserData}
                                                 />
                                             </div>
                                         </div>
@@ -186,7 +220,7 @@ const Hireme = () => {
                                                     className="form-control"
                                                     placeholder=""
                                                     value={userData.amount = total}
-                                                    
+                                                    onChange={postUserData}
                                                 />
                                             </div>
                                             <div className="col-12 col-lg-4 contact-input-feild" style={{ marginTop: "-2.5rem", color: " ", fontWeight: "bold" }}>
@@ -197,11 +231,24 @@ const Hireme = () => {
                                                     className="form-control"
                                                     placeholder=""
                                                     value={userData.phone}
-                                                    
+                                                    onChange={postUserData}
                                                 />
                                             </div>
                                             <div className="col-12 col-lg-4 contact-input-feild" style={{ marginTop: "-2.5rem", color: " ", fontWeight: "bold" }}>
-                                                <p style={{ fontSize: "20px", marginBottom: "0px", fontFamily: "poppins" }}>Email</p>
+                                                <p style={{ fontSize: "20px", marginBottom: "0px", fontFamily: "poppins" }}>Alt. Phone Number</p>
+                                                <input
+                                                    type="text"
+                                                    name="altPhone"
+                                                    className="form-control"
+                                                    placeholder=""
+                                                    value={userData.altPhone}
+                                                    onChange={postUserData}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-12 col-lg-4 contact-input-feild" style={{ marginTop: "-2.5rem", color: " ", fontWeight: "bold" }}>
+                                                <p style={{ fontSize: "20px", marginBottom: "0px", fontFamily: "poppins" }}>Email ID</p>
                                                 <input
                                                     type="text"
                                                     name="email"
@@ -209,10 +256,33 @@ const Hireme = () => {
                                                     placeholder=""
                                                     value={userData.email}
                                                     onChange={postUserData}
-                                                    
+                                                />
+                                            </div>
+                                            <div className="col-12 col-lg-4 contact-input-feild" style={{ marginTop: "-2.5rem", color: " ", fontWeight: "bold" }}>
+                                                <p style={{ fontSize: "20px", marginBottom: "0px", fontFamily: "poppins" }}>Alternative Email ID</p>
+                                                <input
+                                                    type="text"
+                                                    name="altEmail"
+                                                    className="form-control"
+                                                    placeholder=""
+                                                    value={userData.altEmail}
+                                                    onChange={postUserData}
+                                                />
+                                            </div>
+                                
+                                            <div className="col-12 col-lg-4 contact-input-feild" style={{ marginTop: "-2.5rem", color: " ", fontWeight: "bold" }}>
+                                                <p style={{ fontSize: "20px", marginBottom: "0px", fontFamily: "poppins" }}>Address</p>
+                                                <input
+                                                    type="text"
+                                                    name="address"
+                                                    className="form-control"
+                                                    placeholder=""
+                                                    value={userData.address}
+                                                    onChange={postUserData}
                                                 />
                                             </div>
                                         </div>
+
                                         <div className="row">
                                             <div className="col-12 col-lg-4 contact-input-feild" style={{ marginTop: "-3rem", color: " ", fontWeight: "bold" }}>
                                                 <p style={{ fontSize: "20px", marginBottom: "0px", marginTop: "16px", fontFamily: "poppins" }}>Starting Time</p>
@@ -222,6 +292,7 @@ const Hireme = () => {
                                                     className="form-control card-5"
                                                     placeholder=""
                                                     value={userData.stime}
+                                                    min={getCurrentDateTime().split('T')[1]} // Minimum time set to current time
                                                     onChange={postUserData}
                                                 />
                                             </div>
@@ -233,10 +304,10 @@ const Hireme = () => {
                                                     className="form-control"
                                                     placeholder=""
                                                     value={userData.etime}
+                                                    min={userData.stime} // Minimum time set to start time
                                                     onChange={postUserData}
                                                 />
                                             </div>
-                                            
                                             <div className="col-12 col-lg-4 contact-input-feild" style={{ marginTop: "-3rem", color: " ", fontWeight: "bold" }}>
                                                 <p style={{ fontSize: "20px", marginBottom: "0px", marginTop: "16px", fontFamily: "poppins" }}>Date</p>
                                                 <input
@@ -246,24 +317,12 @@ const Hireme = () => {
                                                     className="form-control"
                                                     placeholder=""
                                                     value={userData.date}
+                                                    min={getCurrentDateTime().split('T')[0]} // Minimum date set to current date
                                                     onChange={postUserData}
                                                 />
                                             </div>
+                                        </div>
                                         
-                                        </div>
-                                        <div className="row">
-                                            <div className="col-12 col-lg-12 contact-input-feild" style={{ marginTop: "-2.5rem", color: " ", fontWeight: "bold" }}>
-                                                <p style={{ fontSize: "20px", marginBottom: "0px", marginTop: "16px", fontFamily: "poppins" }}>Address</p>
-                                                <input
-                                                    type="text"
-                                                    name="address"
-                                                    className="form-control"
-                                                    placeholder=""
-                                                    value={userData.address}
-                                                    onChange={postUserData}
-                                                />
-                                            </div>
-                                        </div>
                                         <div className="row">
                                             <div className="col-12 col-lg-12 contact-input-feild" style={{ marginTop: "-2.5rem", color: " ", fontWeight: "bold" }}>
                                                 <p style={{ fontSize: "20px", marginBottom: "0px", marginTop: "16px", fontFamily: "poppins" }}>Service</p>
@@ -299,6 +358,8 @@ const Hireme = () => {
 };
 
 export default Hireme;
+
+
     // Razorpay code commented out
     // function loadRazorpay(total) {
     //     const script = document.createElement('script');

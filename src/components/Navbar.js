@@ -3,13 +3,12 @@ import { Link, useHistory } from 'react-router-dom';
 import Popuplogin from './Popuplogin';
 import { UserContext } from '../App';
 import image from "../image/work4youlogo.png";
-import { FaShoppingCart, FaSearch,FaSun, FaMoon } from "react-icons/fa";
-import { MdLocationOn } from "react-icons/md"; // Use new location icon
+import { FaShoppingCart, FaSearch, FaSun, FaMoon, FaBars, FaTimes } from "react-icons/fa";
+import { MdLocationOn } from "react-icons/md";
 import { AiFillDelete } from "react-icons/ai";
 import image2 from "../Imagesmall/maidimage.jpg";
 import { getUserLocation, fetchCityName } from './locationUtils';
 import './styles.css';
-
 import {
   Badge,
   Button,
@@ -28,6 +27,7 @@ const Navbar = () => {
   const [userName, setUserName] = useState('');
   const [theme, setTheme] = useState('light');
   const [city, setCity] = useState('Fetching location...');
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const userHome = async () => {
@@ -65,11 +65,15 @@ const Navbar = () => {
     document.body.className = newTheme + '-theme';
   };
 
+  const toggleNavbar = () => {
+    setIsOpen(!isOpen);
+  };
+
   const searchQueryToRouteMap = {
     'driver': '/Driver',
     'babysitter': '/Babysitter',
     'cook': '/Cook',
-    'omeservice': '/HomeMaid',
+    'homeservice': '/HomeMaid',
     'pestcontrol': '/PestControl',
     'cleaning': '/Cleaning',
   };
@@ -136,28 +140,50 @@ const Navbar = () => {
 
   return (
     <>
-       <nav
+      <nav
         className={`navbar navbar-expand-lg ${theme === 'dark' ? 'navbar-dark' : 'navbar-light'} nav2`}
         style={{ position: 'fixed', top: '0', width: '100%', zIndex: '9999', fontFamily: 'Poppins' }}>
         <div className="container-fluid">
           <Popuplogin />
-          <button
-            className={`navbar-toggler ${theme === 'dark' ? 'text-light' : 'text-dark'}`}
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
+          <div className="navbar-toggler-container">
+            <button
+              className={`navbar-toggler ${theme === 'dark' ? 'text-light' : 'text-dark'}`}
+              type="button"
+              onClick={toggleNavbar}
+              aria-controls="navbarSupportedContent"
+              aria-expanded={isOpen ? "true" : "false"}
+              aria-label="Toggle navigation"
+              style={{ order: 1 }}>
+              <FaBars />
+            </button>
 
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            {/* {isOpen && (
+           <button
+           className={`navbar-close ${theme === 'dark' ? 'text-light' : 'text-dark'}`}
+           type="button"
+           onClick={toggleNavbar}
+           style={{
+             position: 'absolute',
+             right: '20px', // Adjust the spacing from the right
+             top: '0',   // Adjust the spacing from the top
+             border: 'none',
+             background: 'none',
+             fontSize: '24px', // Adjust the size as needed
+             cursor: 'pointer',
+             zIndex: '1000',  // Ensure it appears above other content
+             boxShadow: 'none' // Remove box shadow
+           }}
+         >
+           <FaTimes />
+         </button>
+         
+            )} */}
+          </div>
+
+          <div className={`collapse navbar-collapse ${isOpen ? 'show' : ''}`} id="navbarSupportedContent" style={{ order: 2 }}>
             <Link to="/" className="margin1">
               <img src={image} alt="error" />
             </Link>
-          
-            
 
             <ul className="navbar-nav mx-auto mb-2">
               <li className="nav-item">
@@ -169,7 +195,7 @@ const Navbar = () => {
               <li className="nav-item">
                 <Link className="nav-link active hover-underline-animation margin w3-animate-top" to="/homemaid">HOME SERVICE</Link>
               </li>
-             
+
               <li className="nav-item dropdown margin w3-animate-top">
                 <Link className="nav-link" to="/" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ color: "white" }}>
                   APPLY FOR JOB
@@ -189,18 +215,13 @@ const Navbar = () => {
                 </ul>
               </li>
             </ul>
-            {/* Location icon with city name */}
             <div className="navbar-location" style={{ display: 'flex', alignItems: 'center', marginRight: '2rem', color: theme === 'dark' ? 'white' : 'black' }}>
-              <MdLocationOn size={20} /> {/* Changed icon */}
+              <MdLocationOn size={20} />
               <span style={{ marginLeft: '0.5rem' }}>{city}</span>
             </div>
-            {/* Include the SearchBar component */}
             <SearchBar />
-
-            
-
             <Dropdown alignRight>
-              <Dropdown.Toggle variant="btn btn-primary mr-3" style={{ width: "4rem", marginRight: "1rem" }}>
+              <Dropdown.Toggle variant="btn btn-primary mr-3" style={{ width: "5rem", marginRight: "1rem" }}>
                 <FaShoppingCart color="white" fontSize="25px" />
                 <Badge>{cart.length}</Badge>
               </Dropdown.Toggle>
@@ -249,13 +270,13 @@ const Navbar = () => {
               </Dropdown.Menu>
             </Dropdown>
             <Button
-             className={`toggle ${theme === 'dark' ? 'text-light' : 'text-dark'}`}
+              className={`toggle ${theme === 'dark' ? 'text-light' : 'text-dark'}`}
               variant="transparent"
-             onClick={toggleTheme}
-           style={{ marginRight: '1rem', width:'50px' }}
->
-  {theme === 'dark' ? <FaSun color="#ffffff" /> : <FaMoon color="#000000" />}
-</Button>
+              onClick={toggleTheme}
+              style={{ marginRight: '1rem', width: '50px' }}
+            >
+              {theme === 'dark' ? <FaSun color="#ffffff" /> : <FaMoon color="#000000" />}
+            </Button>
             <RenderMenu />
           </div>
         </div>

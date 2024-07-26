@@ -10,7 +10,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { MdCleaningServices } from 'react-icons/md'
 import { Button, Form } from "react-bootstrap"
-// import { CartState } from "../reducer/Context";
+import { CartState } from "../reducer/Context";
 import Card from './Card';
 import Data from "../db.json"
 import { BsFilterSquare } from 'react-icons/bs'
