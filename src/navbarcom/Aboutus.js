@@ -49,7 +49,11 @@ const Aboutus = () => {
           <div className='col-md-6'>
             <h3 style={{ color: "#121212", fontFamily: "Poppins" }}>Why We Do<span style={{ color: "#dbaf32" }}> Business</span></h3>
             <p style={{ color: "grey", fontFamily: "Poppins" }}>
+<<<<<<< HEAD
               At Work4You, we intend to make lives easier by providing maid service in Kalyan-Dombivali. Finding domestic help was a hassle until Work4You was launched. We have helped thousands of help seekers find what they are looking for whether it be a maid, cook, domestic helper, nanny or nurse.</p>
+=======
+              At Work4You, we intend to make lives easier by providing maid service in NSTI Noida. Finding domestic help was a hassle until Work4You was launched. We have helped thousands of help seekers find what they are looking for whether it be a maid, cook, domestic helper, nanny or nurse.</p>
+>>>>>>> origin/main
 
           </div>
           <div className='col-md-6'>
@@ -75,7 +79,11 @@ const Aboutus = () => {
           <div className='col-md-6 col-sm-12 ' style={{ marginLeft: "1rem" }}>
 
 
+<<<<<<< HEAD
             <h3 style={{ color: "#121212" }}>Total Home Facility Services - <span style={{ color: "#dbaf32" }}>Best Facility Management Service in kalyan-Dombivali</span> </h3>
+=======
+            <h3 style={{ color: "#121212" }}>Total Home Facility Services - <span style={{ color: "#dbaf32" }}>Best Facility Management Service in NSTI Noida</span> </h3>
+>>>>>>> origin/main
             <p style={{ color: "grey" }}>Trusting a stranger to roam around in your house and clean it properly as if it were their own is a tricky business. We Indians rely on maids heavily and supervising them all the time can be an exhausting task. Total Home Facility Services understands this need to have maids and other services with fewer cons and more pros. We, at Total Home Facility Services, have a staff of resourceful and reliable professionals, all of whom are committed to creating a meaningful, sustainable employment.</p>
             <div className='row'>
               <div className='col-md-6'>
@@ -89,8 +97,13 @@ const Aboutus = () => {
 
               </div>
             </div>
+<<<<<<< HEAD
             <h3 style={{ color: "#121212" }}>Hire Best Maids in<span style={{ color: "#dbaf32" }}> Kalyan-Dombivali</span></h3>
             <p style={{ color: "grey" }}>Trust us as a maid service agency that provides a maid best suited for your needs. Call us today to hire a maid. The domestic candidates that we provide have the vital experience and skills to suit your needs and desires. We only place maids who know the job well. We conduct thorough background checks so you feel safe and secured with your choice of maids. Contact one of the best maid service agencies now and discover a maid whoâ€™s ideal for you. To ease your problems, we have now started our professional maids’s services across the nation in Pune, Hyderabad, Bangalore, Ahmedabad, Surat and many more.</p>
+=======
+            <h3 style={{ color: "#121212" }}>Hire Best Service in<span style={{ color: "#dbaf32" }}> NSTI Noida</span></h3>
+            <p style={{ color: "grey" }}>Trust us as a service agency that provides a service best suited for your needs. Call us today to hire a maid. The domestic candidates that we provide have the vital experience and skills to suit your needs and desires. We only place Work4You who know the job well. We conduct thorough background checks so you feel safe and secured with your choice of maids. Contact one of the best maid service agencies now and discover a Service ideal for you. To ease your problems, we have now started our professional services across the nation in Delhi, Pune, Hyderabad, Bangalore, Ahmedabad, Surat and many more.</p>
+>>>>>>> origin/main
 
 
           </div>

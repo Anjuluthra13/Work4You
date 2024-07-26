@@ -116,7 +116,11 @@ const Home = () => {
           <div className='row '>
             <div className='col-xl-4 col-lg-4 col-md-6 col-sm-12'>
               <center>
+<<<<<<< HEAD
                 <Link to="/clean">
+=======
+                <Link to="/homemaid">
+>>>>>>> origin/main
 
                   <img src={image41} alt="" className="small-img-size3 zoom2"></img>
                 </Link>
@@ -127,7 +131,11 @@ const Home = () => {
             <div className='col-xl-4 col-lg-4 col-md-6 col-sm-12'>
 
               <center>
+<<<<<<< HEAD
                 <Link to="/babycare">
+=======
+                <Link to="/homemaid">
+>>>>>>> origin/main
 
                   <img src={image36} alt="" className="small-img-size3 zoom2 "></img>
                 </Link>
@@ -138,7 +146,11 @@ const Home = () => {
             <div className='col-xl-4 col-lg-4 col-md-6 col-sm-12'>
 
               <center>
+<<<<<<< HEAD
                 <Link to="/Cooking">
+=======
+                <Link to="/homemaid">
+>>>>>>> origin/main
 
                   <img src={image38} alt="" className="small-img-size3 zoom2 "></img>
                 </Link>
@@ -180,7 +192,11 @@ const Home = () => {
           <div className='row '>
             <div className='col-xl-4 col-lg-4 col-md-6 col-sm-12'>
               <center>
+<<<<<<< HEAD
                 <Link to="/Plumber">
+=======
+                <Link to="/homemaid">
+>>>>>>> origin/main
 
                   <img src={image35} alt="" className="small-img-size3 zoom2 "></img>
                 </Link>
@@ -191,7 +207,11 @@ const Home = () => {
             <div className='col-xl-4 col-lg-4 col-md-6 col-sm-12'>
 
               <center>
+<<<<<<< HEAD
                 <Link to="/Carpenter">
+=======
+                <Link to="/homemaid">
+>>>>>>> origin/main
 
                   <img src={image37} alt="" className="small-img-size3 zoom2 "></img>
                 </Link>
@@ -202,7 +222,11 @@ const Home = () => {
             <div className='col-xl-4 col-lg-4 col-md-6 col-sm-12'>
 
               <center>
+<<<<<<< HEAD
                 <Link to="/electric">
+=======
+                <Link to="/homemaid">
+>>>>>>> origin/main
 
                   <img src={image44} alt="" className="small-img-size3 zoom2 "></img>
                 </Link>
@@ -243,7 +267,11 @@ const Home = () => {
           <div className='row '>
             <div className='col-xl-4 col-lg-4 col-md-6 col-sm-12'>
               <center>
+<<<<<<< HEAD
                 <Link to="/driver">
+=======
+                <Link to="/homemaid">
+>>>>>>> origin/main
 
                   <img src={image39} alt="" className="small-img-size3 zoom2 "></img>
                 </Link>
@@ -265,7 +293,11 @@ const Home = () => {
             <div className='col-xl-4 col-lg-4 col-md-6 col-sm-12'>
 
               <center>
+<<<<<<< HEAD
                 <Link to="/paint">
+=======
+                <Link to="/homemaid">
+>>>>>>> origin/main
 
                   <img src={image46} alt="" className="small-img-size3 zoom2 "></img>
                 </Link>

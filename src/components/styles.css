@@ -114,6 +114,7 @@
     .navbar-location span {
       font-size: 16px; /* Adjust as needed */
     }
+<<<<<<< HEAD
     .input-group {
       position: relative;
     }
@@ -158,3 +159,31 @@
       background-color: #f0f0f0;
     }
     
+=======
+
+    .navbar-toggler-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+    
+    .navbar-toggler {
+      order: 1;
+    }
+    
+    .navbar-close {
+      position: absolute;
+      left: 350px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-size: 2.5rem;
+      z-index: 1000; /* Ensure it appears above other content */
+    }
+    
+    .collapse.show .navbar-toggler {
+      display: none;
+    }
+    
+>>>>>>> origin/main
