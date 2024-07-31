@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect,useRef   } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import Popuplogin from './Popuplogin';
 import { UserContext } from '../App';
@@ -69,17 +69,25 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
 
+  
   const searchQueryToRouteMap = {
-    'driver': '/Driver',
-    'babysitter': '/Babysitter',
-    'cook': '/Cook',
-    'homeservice': '/HomeMaid',
-    'pestcontrol': '/PestControl',
-    'cleaning': '/Cleaning',
+    'driver': '/driver',
+    'babysitter': '/babycare',
+    'cooking': '/cooking',
+    'homeservice': '/homemaid',
+    'pest': '/pest',
+    'cleaning': '/clean',
+    'painter': '/paint',
+    'carpenter': '/carpenter'
   };
+
+  const services = Object.keys(searchQueryToRouteMap);
 
   const SearchBar = () => {
     const [searchQuery, setSearchQuery] = useState('');
+    const [suggestions, setSuggestions] = useState([]);
+    const [showSuggestions, setShowSuggestions] = useState(false);
+    const suggestionsRef = useRef(null);
     const history = useHistory();
 
     const handleSearch = (e) => {
@@ -91,17 +99,56 @@ const Navbar = () => {
         console.log("Service not found");
         history.push('/notfound');
       }
-    };
+    }
+
+    const handleInputChange = (e) => {
+      const query = e.target.value;
+      setSearchQuery(query);
+      if (query) {
+        const filteredSuggestions = services.filter(service =>
+          service.toLowerCase().startsWith(query.toLowerCase())
+        );
+        setSuggestions(filteredSuggestions.length > 0 ? filteredSuggestions : ['No match']);
+      } else {
+        setSuggestions(services);
+      }
+      setShowSuggestions(true);
+    }
+
+    const handleFocus = () => {
+      setSuggestions(services);
+      setShowSuggestions(true);
+    }
+
+    const handleBlur = () => {
+      setTimeout(() => {
+        setShowSuggestions(false);
+      }, 150);
+    }
+
+    const handleSuggestionClick = (suggestion) => {
+      if (suggestion !== 'No match') {
+        setSearchQuery(suggestion);
+        setSuggestions([]);
+        setShowSuggestions(false);
+        const route = searchQueryToRouteMap[suggestion.toLowerCase()];
+        if (route) {
+          history.push(route);
+        }
+      }
+    }
 
     return (
-      <form className="d-flex search-bar" onSubmit={handleSearch} style={{ marginRight: '3rem' }}>
-        <div className="input-group">
+      <form className="d-flex search-bar" onSubmit={handleSearch} style={{ marginRight: '3rem', position: 'relative' }}>
+        <div className="input-group" style={{ position: 'relative' }}>
           <input
             type="text"
             className="form-control"
             placeholder="Search for services..."
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={handleInputChange}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
             style={{ width: '150px', height: '20px' }}
           />
           <div className="input-group-append">
@@ -110,10 +157,24 @@ const Navbar = () => {
             </Button>
           </div>
         </div>
+        {showSuggestions && (
+          <ul className="suggestions-list" ref={suggestionsRef} style={{ position: 'absolute', top: '100%', left: 0, zIndex: 1000, backgroundColor: 'white', border: '1px solid #ddd', padding: 0, margin: 0, listStyle: 'none' }}>
+            {suggestions.length > 0 ? suggestions.map(suggestion => (
+              <li
+                key={suggestion}
+                onMouseDown={() => handleSuggestionClick(suggestion)}
+                style={{ padding: '8px', cursor: 'pointer', backgroundColor: 'white' }}
+              >
+                {suggestion}
+              </li>
+            )) : (
+              <li style={{ padding: '8px' }}>No match</li>
+            )}
+          </ul>
+        )}
       </form>
     );
   };
-
   const RenderMenu = () => {
     if (state) {
       return (

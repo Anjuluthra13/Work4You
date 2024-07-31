@@ -1,3 +1,4 @@
+
 import Auth from "./components/Auth";
 
 import { useUserContext } from "./contexts/UserContext";
@@ -63,7 +64,16 @@ import 'react-toastify/dist/ReactToastify.css'
 import Application from "./Admin.js/Application";
 import Showdelivary from "./navbarcom/Showdelivary";
 import Localadd from "./Admin.js/Localadd";
+import Babycare from "./navbarcom/babycare";
+import Clean from "./navbarcom/clean";
+import Cooking from "./navbarcom/cooking";
+import Electric from "./navbarcom/Electrician";
+import Paint from "./navbarcom/painter";
+import Plumber from "./navbarcom/plumber";
+import Pest from "./navbarcom/pestcontrol";
+import Carpenter from "./navbarcom/carpenter"
 export const UserContext = createContext();
+
 
 
 
@@ -232,6 +242,37 @@ function App({ location }) {
               <Showorder></Showorder>
             </Route>
 
+
+            <Route exact path="/babycare">
+              <Babycare></Babycare>
+            </Route>
+
+            
+            <Route exact path="/Cooking">
+              <Cooking></Cooking>
+            </Route>
+            
+            <Route exact path="/clean">
+              <Clean></Clean>
+            </Route>
+
+            <Route exact path="/electric">
+              <Electric></Electric>
+            </Route>
+
+            <Route exact path="/Paint">
+              <Paint></Paint>
+            </Route>
+
+            <Route exact path="/Plumber">
+              <Plumber></Plumber>
+            </Route>
+            <Route exact path="/Pest">
+              <Pest></Pest>
+            </Route>
+            <Route exact path="/carpenter">
+              <Carpenter></Carpenter>
+            </Route>
             {/* <div className="background4"  style={{width:"103%",marginLeft:"0rem"}}> 
           <div className="tranbox4">
       

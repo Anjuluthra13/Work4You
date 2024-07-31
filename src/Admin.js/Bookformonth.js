@@ -45,7 +45,8 @@ const Bookformonth = () => {
 
 
                             <div>
-                                <h1>    <i className="fas fa-box-open" style={{ fontSize: "22px" }}></i> Book For Month Details</h1>
+                                <h1>    <i className="fas fa-box-open" style={{ fontSize: "22px" }}></i>
+                            Subscription for Month</h1>
 
                             </div>
                             <br></br>

@@ -116,7 +116,8 @@ const Home = () => {
           <div className='row '>
             <div className='col-xl-4 col-lg-4 col-md-6 col-sm-12'>
               <center>
-                <Link to="/homemaid">
+                <Link to="/clean">
+              
 
                   <img src={image41} alt="" className="small-img-size3 zoom2"></img>
                 </Link>
@@ -127,7 +128,8 @@ const Home = () => {
             <div className='col-xl-4 col-lg-4 col-md-6 col-sm-12'>
 
               <center>
-                <Link to="/homemaid">
+                <Link to="/babycare">
+           
 
                   <img src={image36} alt="" className="small-img-size3 zoom2 "></img>
                 </Link>
@@ -138,7 +140,8 @@ const Home = () => {
             <div className='col-xl-4 col-lg-4 col-md-6 col-sm-12'>
 
               <center>
-                <Link to="/homemaid">
+                <Link to="/Cooking">
+              
 
                   <img src={image38} alt="" className="small-img-size3 zoom2 "></img>
                 </Link>
@@ -180,7 +183,8 @@ const Home = () => {
           <div className='row '>
             <div className='col-xl-4 col-lg-4 col-md-6 col-sm-12'>
               <center>
-                <Link to="/homemaid">
+                <Link to="/Plumber">
+            
 
                   <img src={image35} alt="" className="small-img-size3 zoom2 "></img>
                 </Link>
@@ -191,7 +195,8 @@ const Home = () => {
             <div className='col-xl-4 col-lg-4 col-md-6 col-sm-12'>
 
               <center>
-                <Link to="/homemaid">
+                <Link to="/Carpenter">
+                
 
                   <img src={image37} alt="" className="small-img-size3 zoom2 "></img>
                 </Link>
@@ -202,7 +207,8 @@ const Home = () => {
             <div className='col-xl-4 col-lg-4 col-md-6 col-sm-12'>
 
               <center>
-                <Link to="/homemaid">
+                <Link to="/electric">
+                
 
                   <img src={image44} alt="" className="small-img-size3 zoom2 "></img>
                 </Link>
@@ -243,7 +249,8 @@ const Home = () => {
           <div className='row '>
             <div className='col-xl-4 col-lg-4 col-md-6 col-sm-12'>
               <center>
-                <Link to="/homemaid">
+                <Link to="/driver">
+                
 
                   <img src={image39} alt="" className="small-img-size3 zoom2 "></img>
                 </Link>
@@ -265,7 +272,8 @@ const Home = () => {
             <div className='col-xl-4 col-lg-4 col-md-6 col-sm-12'>
 
               <center>
-                <Link to="/homemaid">
+                <Link to="/paint">
+               
 
                   <img src={image46} alt="" className="small-img-size3 zoom2 "></img>
                 </Link>
@@ -373,7 +381,7 @@ const Home = () => {
   <center>
     <h3>WHY CHOOSE US</h3>
     <h5 style={{ color: "grey", marginTop: "2rem" }}>
-      The world’s latest in clean cleaning service companies. We can clean your
+      The worlds latest in clean cleaning service companies. We can clean your
       residential space, including homes.
     </h5>
     <hr />

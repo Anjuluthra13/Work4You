@@ -55,7 +55,7 @@ const Users = () => {
                 updata ?
                     <>
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <strong>{updata.name}</strong>  updated succesfully!
+                            <strong>{updata.name}</strong>  Updated succesfully!
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     </> : ""
@@ -65,7 +65,7 @@ const Users = () => {
                 dltdata ?
                     <>
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <strong>{dltdata.name}</strong>  deleted succesfully!
+                            <strong>{dltdata.name}</strong>  Deleted succesfully!
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     </> : ""
@@ -107,7 +107,7 @@ const Users = () => {
                                             <tr className=" table-active">
                                                 <th scope="col mt-1"><h4>Id</h4></th>
                                                 <th scope="col"><h4>Username</h4></th>
-                                                <th scope="col"><h4>email</h4></th>
+                                                <th scope="col"><h4>Email</h4></th>
 
                                                 <th scope="col"><h4>Number</h4></th>
                                                 <th scope="col"><h4>User ID</h4></th>

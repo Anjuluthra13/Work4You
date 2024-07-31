@@ -11,12 +11,12 @@ import { Link } from 'react-router-dom'
 
 const Smallcard = () => {
     return (
-        <div className='row rowv4 card-5  ' style={{ borderRadius: "10px" , marginTop:"-2rem" , background:"white"}}>
+        <div className='row rowv5 card-5  ' style={{ borderRadius: "10px" , marginTop:"-2rem" , background:"white"}}>
             <div className='row '>
                 <div className='col-lg-2 col-xl-2 col-md-4 col-sm-6 '>
                     <center>
 
-                        <Link to='/homemaid'>
+                        <Link to='/clean'>
                             <img src={image} className="zoom small-img-size" alt=""></img>
 
                         </Link>
@@ -26,7 +26,7 @@ const Smallcard = () => {
                 <div className='col-lg-2 col-xl-2 col-md-4 col-sm-6 '>
                     <center>
 
-                        <Link to='/homemaid'>
+                        <Link to='/babycare'>
                             <img src={image1} className="zoom small-img-size" alt=""></img>
 
                         </Link>
@@ -36,7 +36,7 @@ const Smallcard = () => {
                 <div className='col-lg-2 col-xl-2 col-md-4 col-sm-6 '>
                     <center>
 
-                        <Link to='/homemaid'>
+                        <Link to='/cooking'>
                             <img src={image2} className="zoom small-img-size" alt=""></img>
 
                         </Link>
@@ -48,7 +48,7 @@ const Smallcard = () => {
 
                     <center>
 
-                        <Link to='/homemaid'>
+                        <Link to='/driver'>
                             <img src={image3} className="zoom small-img-size" alt=""></img>
 
                         </Link>
@@ -58,21 +58,12 @@ const Smallcard = () => {
 
                     <center>
 
-                        <Link to='/homemaid'>
+                        <Link to='/electric'>
                             <img src={image4} className="zoom small-img-size" alt=""></img>
 
                         </Link>
                     </center>                  </div>
-                <div className='col-lg-2 col-xl-2 col-md-4 col-sm-6 '>
-
-                    <center>
-
-                        <Link to='/homemaid'>
-                            <img src={image5} className="zoom small-img-size" alt=""></img>
-
-                        </Link>
-                    </center>
-                </div>
+                
             </div>
             <div className='row '>
                 <div className='col-lg-2 col-xl-2 col-md-4 col-sm-6 '>
@@ -82,39 +73,33 @@ const Smallcard = () => {
                 <div className='col-lg-2 col-xl-2 col-md-4 col-sm-6 '>
                     <center>
 
-                        <Link to='/homemaid'>
+                        <Link to='/Pest'>
                             <img src={image6} className="zoom small-img-size" alt=""></img>
 
                         </Link>
                     </center>                  </div>
-                <div className='col-lg-2 col-xl-2 col-md-4 col-sm-6 '>
+                    <div className='col-lg-2 col-xl-2 col-md-4 col-sm-6 '>
+
                     <center>
 
-                        <Link to='/homemaid'>
+                        <Link to='/paint'>
                             <img src={image5} className="zoom small-img-size" alt=""></img>
 
                         </Link>
-                    </center>                    </div>
+                    </center>
+                </div>
+               
                 <div className='col-lg-2 col-xl-2 col-md-4 col-sm-6 '>
                     <center>
 
-                        <Link to='/homemaid'>
+                        <Link to='/Plumber'>
                             <img src={image7} className="zoom small-img-size" alt=""></img>
 
                         </Link>
                     </center>
                 </div>
-                <div className='col-lg-2 col-xl-2 col-md-4 col-sm-6 '>
-                    <center>
-
-                        <Link to='/homemaid'>
-                            <img src={image3} className="zoom small-img-size" alt=""></img>
-
-                        </Link>
-                    </center>                    </div>
-                <div className='col-lg-2 col-xl-2 col-md-4 col-sm-6 '>
-
-                </div>
+                
+                
             </div>
 
 

@@ -106,6 +106,8 @@ const Hireme = () => {
         const endDateTime = convertDateTime(date, etime);
         const currentDateTime = new Date();
 
+        const timeDifference = (endDateTime - startDateTime) / (1000 * 60 * 60); // Difference in hours
+
         if (!name || !id || !email || !phone || !amount || !city || !state || !stime || !etime || !date || !address || !service) {
             toast.error("Please fill in all required fields", {
                 position: "top-center",
@@ -126,10 +128,20 @@ const Hireme = () => {
                 draggable: true,
                 progress: 0,
             });
+        } else if (timeDifference < 1) {
+            toast.error("End time must be at least one hour after the start time", {
+                position: "top-center",
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: 0,
+            });
         } else {
             toast.success("Your booking has been submitted successfully", {
                 position: "top-center",
-                autoClose: 1000,
+                autoClose: 2000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -212,8 +224,54 @@ const Hireme = () => {
                                             </div>
                                         </div>
                                         <div className="row">
-                                            <div className="col-12 col-lg-4 contact-input-feild" style={{ marginTop: "-2.5rem", color: "#121212", fontWeight: "bold" }}>
-                                                <p style={{ fontSize: "20px", marginBottom: "0px", fontFamily: "poppins" }}>Amount</p>
+                                            <div className="col-12 col-lg-4 contact-input-feild" style={{ marginTop: "-2.5rem", color: " ", fontWeight: "bold" }}>
+                                                <p style={{ fontSize: "20px", marginBottom: "0px", marginTop: "26px", fontFamily: "poppins" }}>Email</p>
+                                                <input
+                                                    type="email"
+                                                    name="email"
+                                                    className="form-control"
+                                                    placeholder=""
+                                                    value={userData.email}
+                                                    onChange={postUserData}
+                                                />
+                                            </div>
+                                            <div className="col-12 col-lg-4 contact-input-feild" style={{ marginTop: "-2.5rem", color: " ", fontWeight: "bold" }}>
+                                                <p style={{ fontSize: "20px", marginBottom: "0px", marginTop: "26px", fontFamily: "poppins" }}>Alternative Email</p>
+                                                <input
+                                                    type="email"
+                                                    name="altEmail"
+                                                    className="form-control"
+                                                    placeholder=""
+                                                    value={userData.altEmail}
+                                                    onChange={postUserData}
+                                                />
+                                            </div>
+                                            <div className="col-12 col-lg-4 contact-input-feild" style={{ marginTop: "-2.5rem", color: " ", fontWeight: "bold" }}>
+                                                <p style={{ fontSize: "20px", marginBottom: "0px", marginTop: "26px", fontFamily: "poppins" }}>Phone Number</p>
+                                                <input
+                                                    type="number"
+                                                    name="phone"
+                                                    className="form-control"
+                                                    placeholder=""
+                                                    value={userData.phone}
+                                                    onChange={postUserData}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-12 col-lg-4 contact-input-feild" style={{ marginTop: "-2.5rem", color: " ", fontWeight: "bold" }}>
+                                                <p style={{ fontSize: "20px", marginBottom: "0px", marginTop: "26px", fontFamily: "poppins" }}>Alt. Phone Number</p>
+                                                <input
+                                                    type="number"
+                                                    name="altPhone"
+                                                    className="form-control"
+                                                    placeholder=""
+                                                    value={userData.altPhone}
+                                                    onChange={postUserData}
+                                                />
+                                            </div>
+                                            <div className="col-12 col-lg-4 contact-input-feild" style={{ marginTop: "-2.5rem", color: " ", fontWeight: "bold" }}>
+                                                <p style={{ fontSize: "20px", marginBottom: "0px", marginTop: "26px", fontFamily: "poppins" }}>Amount</p>
                                                 <input
                                                     type="number"
                                                     name="amount"
@@ -224,54 +282,7 @@ const Hireme = () => {
                                                 />
                                             </div>
                                             <div className="col-12 col-lg-4 contact-input-feild" style={{ marginTop: "-2.5rem", color: " ", fontWeight: "bold" }}>
-                                                <p style={{ fontSize: "20px", marginBottom: "0px", fontFamily: "poppins" }}>Phone Number</p>
-                                                <input
-                                                    type="text"
-                                                    name="phone"
-                                                    className="form-control"
-                                                    placeholder=""
-                                                    value={userData.phone}
-                                                    onChange={postUserData}
-                                                />
-                                            </div>
-                                            <div className="col-12 col-lg-4 contact-input-feild" style={{ marginTop: "-2.5rem", color: " ", fontWeight: "bold" }}>
-                                                <p style={{ fontSize: "20px", marginBottom: "0px", fontFamily: "poppins" }}>Alt. Phone Number</p>
-                                                <input
-                                                    type="text"
-                                                    name="altPhone"
-                                                    className="form-control"
-                                                    placeholder=""
-                                                    value={userData.altPhone}
-                                                    onChange={postUserData}
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="col-12 col-lg-4 contact-input-feild" style={{ marginTop: "-2.5rem", color: " ", fontWeight: "bold" }}>
-                                                <p style={{ fontSize: "20px", marginBottom: "0px", fontFamily: "poppins" }}>Email ID</p>
-                                                <input
-                                                    type="text"
-                                                    name="email"
-                                                    className="form-control"
-                                                    placeholder=""
-                                                    value={userData.email}
-                                                    onChange={postUserData}
-                                                />
-                                            </div>
-                                            <div className="col-12 col-lg-4 contact-input-feild" style={{ marginTop: "-2.5rem", color: " ", fontWeight: "bold" }}>
-                                                <p style={{ fontSize: "20px", marginBottom: "0px", fontFamily: "poppins" }}>Alternative Email ID</p>
-                                                <input
-                                                    type="text"
-                                                    name="altEmail"
-                                                    className="form-control"
-                                                    placeholder=""
-                                                    value={userData.altEmail}
-                                                    onChange={postUserData}
-                                                />
-                                            </div>
-                                
-                                            <div className="col-12 col-lg-4 contact-input-feild" style={{ marginTop: "-2.5rem", color: " ", fontWeight: "bold" }}>
-                                                <p style={{ fontSize: "20px", marginBottom: "0px", fontFamily: "poppins" }}>Address</p>
+                                                <p style={{ fontSize: "20px", marginBottom: "0px", marginTop: "26px", fontFamily: "poppins" }}>Address</p>
                                                 <input
                                                     type="text"
                                                     name="address"
@@ -282,50 +293,46 @@ const Hireme = () => {
                                                 />
                                             </div>
                                         </div>
-
                                         <div className="row">
-                                            <div className="col-12 col-lg-4 contact-input-feild" style={{ marginTop: "-3rem", color: " ", fontWeight: "bold" }}>
-                                                <p style={{ fontSize: "20px", marginBottom: "0px", marginTop: "16px", fontFamily: "poppins" }}>Starting Time</p>
+                                            <div className="col-12 col-lg-4 contact-input-feild" style={{ marginTop: "-2.5rem", color: " ", fontWeight: "bold" }}>
+                                                <p style={{ fontSize: "20px", marginBottom: "0px", marginTop: "26px", fontFamily: "poppins" }}>Booking Date</p>
                                                 <input
-                                                    type="time"
-                                                    name="stime"
-                                                    className="form-control card-5"
+                                                    type="date"
+                                                    name="date"
+                                                    className="form-control"
                                                     placeholder=""
-                                                    value={userData.stime}
-                                                    min={getCurrentDateTime().split('T')[1]} // Minimum time set to current time
+                                                    value={userData.date}
+                                                    min={getCurrentDateTime().split('T')[0]}
                                                     onChange={postUserData}
                                                 />
                                             </div>
-                                            <div className="col-12 col-lg-4 contact-input-feild" style={{ marginTop: "-3rem", color: " ", fontWeight: "bold" }}>
-                                                <p style={{ fontSize: "20px", marginBottom: "0px", marginTop: "16px", fontFamily: "poppins" }}>Ending Time</p>
+                                            <div className="col-12 col-lg-4 contact-input-feild" style={{ marginTop: "-2.5rem", color: " ", fontWeight: "bold" }}>
+                                                <p style={{ fontSize: "20px", marginBottom: "0px", marginTop: "26px", fontFamily: "poppins" }}>Booking Time (Start)</p>
+                                                <input
+                                                    type="time"
+                                                    name="stime"
+                                                    className="form-control"
+                                                    placeholder=""
+                                                    value={userData.stime}
+                                                    onChange={postUserData}
+                                                />
+                                            </div>
+                                        
+                                        
+                                            <div className="col-12 col-lg-4 contact-input-feild" style={{ marginTop: "-2.5rem", color: " ", fontWeight: "bold" }}>
+                                                <p style={{ fontSize: "20px", marginBottom: "0px", marginTop: "26px", fontFamily: "poppins" }}>Booking Time (End)</p>
                                                 <input
                                                     type="time"
                                                     name="etime"
                                                     className="form-control"
                                                     placeholder=""
                                                     value={userData.etime}
-                                                    min={userData.stime} // Minimum time set to start time
                                                     onChange={postUserData}
                                                 />
+                                            
                                             </div>
-                                            <div className="col-12 col-lg-4 contact-input-feild" style={{ marginTop: "-3rem", color: " ", fontWeight: "bold" }}>
-                                                <p style={{ fontSize: "20px", marginBottom: "0px", marginTop: "16px", fontFamily: "poppins" }}>Date</p>
-                                                <input
-                                                    type="date"
-                                                    name="date"
-                                                    id=""
-                                                    className="form-control"
-                                                    placeholder=""
-                                                    value={userData.date}
-                                                    min={getCurrentDateTime().split('T')[0]} // Minimum date set to current date
-                                                    onChange={postUserData}
-                                                />
-                                            </div>
-                                        </div>
-                                        
-                                        <div className="row">
                                             <div className="col-12 col-lg-12 contact-input-feild" style={{ marginTop: "-2.5rem", color: " ", fontWeight: "bold" }}>
-                                                <p style={{ fontSize: "20px", marginBottom: "0px", marginTop: "16px", fontFamily: "poppins" }}>Service</p>
+                                                <p style={{ fontSize: "20px", marginBottom: "0px", marginTop: "26px", fontFamily: "poppins" }}>Service Required</p>
                                                 <input
                                                     type="text"
                                                     name="service"
@@ -336,17 +343,25 @@ const Hireme = () => {
                                                 />
                                             </div>
                                         </div>
-                                        <div className="row" style={{ marginBottom: "1rem" }}>
-                                            <div className="col-12 col-lg-12 contact-input-feild">
-                                                <input
-                                                    type="submit"
-                                                    className="btn btn-style w-100"
-                                                    value="Submit"
-                                                />
+                                        <div className="row">
+                                            <div className="col-12 col-lg-12" style={{ marginTop: "-2rem" }}>
+                                                <button type="submit" className="btn btn-style w-100">
+                                                    Submit
+                                                </button>
                                             </div>
                                         </div>
                                     </form>
-                                    <ToastContainer />
+                                    <ToastContainer
+                                        position="top-center"
+                                        autoClose={2000}
+                                        hideProgressBar={false}
+                                        newestOnTop={false}
+                                        closeOnClick
+                                        rtl={false}
+                                        pauseOnFocusLoss
+                                        draggable
+                                        pauseOnHover
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -355,7 +370,7 @@ const Hireme = () => {
             </section>
         </>
     );
-};
+}
 
 export default Hireme;
 

@@ -276,7 +276,8 @@ const Dashboard = () => {
                                 </div>
                                 <div className="col-sm small-box card-7">
                                     <i className="fas fa-shopping-basket fa-2x left1" ></i>
-                                    <h5>Booking for Month</h5>
+                                    <h5>
+                                    Subscription for month</h5>
                                     <h5 style={{ fontSize: "20px", color: "#121212" }} >{getusermonth.length}</h5>
                                 </div>
                             </div>
