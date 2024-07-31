@@ -182,4 +182,101 @@ body.light-theme .card {
   
   .collapse.show .navbar-toggler {
     display: none;
+<<<<<<< HEAD
   }
+=======
+  }
+  
+  /* Dark theme navbar container styles */
+  .navbar-container.dark {
+    background-color: #333;
+    color: #fff;
+    /* Add more dark theme styles as needed */
+  }
+    .navbar-location {
+      display: flex;
+      align-items: center;
+      color: #fff; /* Adjust based on your theme */
+    }
+    
+    .navbar-location svg {
+      margin-right: 0.5rem;
+    }
+    
+    .navbar-location span {
+      font-size: 16px; /* Adjust as needed */
+    }
+<<<<<<< HEAD
+    .input-group {
+      position: relative;
+    }
+    
+    .clear-button {
+      position: absolute;
+      right: 10px; /* Adjust based on input padding */
+      top: 50%;
+      transform: translateY(-50%);
+      border-radius: 50%;
+      padding: 0.25rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .clear-button:hover {
+      background-color: #f0f0f0;
+    }
+    
+    .suggestions-list {
+      position: absolute;
+      background-color: white;
+      border: 1px solid #ccc;
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      width: 150px;
+      z-index: 1000;
+      max-height: 150px;
+      overflow-y: auto;
+      top: 35px; /* Adjust based on input box height */
+    }
+    
+    .suggestions-list li {
+      padding: 8px;
+      cursor: pointer;
+    }
+    
+    .suggestions-list li:hover,
+    .suggestions-list li.active {
+      background-color: #f0f0f0;
+    }
+    
+=======
+
+    .navbar-toggler-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+    
+    .navbar-toggler {
+      order: 1;
+    }
+    
+    .navbar-close {
+      position: absolute;
+      left: 350px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-size: 2.5rem;
+      z-index: 1000; /* Ensure it appears above other content */
+    }
+    
+    .collapse.show .navbar-toggler {
+      display: none;
+    }
+    
+>>>>>>> origin/main
+>>>>>>> origin/main

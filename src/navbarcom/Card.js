@@ -1,9 +1,18 @@
+<<<<<<< HEAD
+// import { prettyDOM } from '@testing-library/react'
+// import { Button } from "react-bootstrap";
+import { CartState } from "../reducer/Context";
+import React from 'react'
+import image from "../Imagesmall/maidimage.jpg"
+// import { Link } from 'react-router-dom';
+=======
 import { prettyDOM } from '@testing-library/react'
 import { Button } from "react-bootstrap";
 import { CartState } from "../reducer/Context";
 import React from 'react'
 import image from "../Imagesmall/maidimage.jpg"
 import { Link } from 'react-router-dom';
+>>>>>>> origin/main
 
 const Card = ({ prod }) => {
     const {

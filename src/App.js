@@ -64,6 +64,10 @@ import 'react-toastify/dist/ReactToastify.css'
 import Application from "./Admin.js/Application";
 import Showdelivary from "./navbarcom/Showdelivary";
 import Localadd from "./Admin.js/Localadd";
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/main
 import Babycare from "./navbarcom/babycare";
 import Clean from "./navbarcom/clean";
 import Cooking from "./navbarcom/cooking";
@@ -72,11 +76,23 @@ import Paint from "./navbarcom/painter";
 import Plumber from "./navbarcom/plumber";
 import Pest from "./navbarcom/pestcontrol";
 import Carpenter from "./navbarcom/carpenter"
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> origin/main
+>>>>>>> origin/main
 export const UserContext = createContext();
 
 
 
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> origin/main
+>>>>>>> origin/main
 function App({ location }) {
 
   const { user, error, loading } = useUserContext();
@@ -242,6 +258,10 @@ function App({ location }) {
               <Showorder></Showorder>
             </Route>
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/main
 
             <Route exact path="/babycare">
               <Babycare></Babycare>
@@ -273,6 +293,11 @@ function App({ location }) {
             <Route exact path="/carpenter">
               <Carpenter></Carpenter>
             </Route>
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> origin/main
+>>>>>>> origin/main
             {/* <div className="background4"  style={{width:"103%",marginLeft:"0rem"}}> 
           <div className="tranbox4">
       
