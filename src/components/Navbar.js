@@ -218,8 +218,12 @@ const Navbar = () => {
               <li className="nav-item">
                 <Link className="nav-link active hover-underline-animation margin w3-animate-top" to="/aboutus">ABOUT US</Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link active hover-underline-animation margin w3-animate-top" to="/homemaid">HOME SERVICE</Link>
+              <li className="nav-item dropdown margin w3-animate-top">
+              <Link className="nav-link" to="/" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ color: "white" }}>SERVICES</Link>
+                <ul className="dropdown center animated2 animatedFadeInUp2 fadeInUp2" aria-labelledby="navbarDropdown">
+                  <li><Link className="dropdown-item zoom" to="/homemaid">Home Service</Link></li>
+                  <li><Link className="dropdown-item zoom" to="/book">Service for Month</Link></li>
+                </ul>
               </li>
               <li className="nav-item dropdown margin w3-animate-top">
                 <Link className="nav-link" to="/" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ color: "white" }}>
