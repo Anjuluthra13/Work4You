@@ -1,6 +1,3 @@
-/* styles.css */
-
-/* General styles */
 .toggle {
   background-color: #ffffff;
   color: #ffffff;
@@ -183,3 +180,135 @@ body.light-theme .card {
   .collapse.show .navbar-toggler {
     display: none;
   }
+
+  /* Ensure the navbar is a flex container */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Ensure the logo is aligned to the right */
+.navbar .navbar-brand {
+  margin-left: auto; /* Pushes the logo to the right */
+}
+
+/* Adjust the navbar items */
+.navbar-nav {
+  flex-grow: 2; /* Allows the navbar items to take up available space */
+  text-align: center; /* Center-aligns items in the navbar */
+}
+
+/* Ensure the navbar toggle button is properly aligned */
+.navbar-toggler {
+  height: 35px; /* Adjust margin if needed */
+  width:50px;
+  margin-right:280px;
+}
+
+/* Ensure the location and search bar are aligned properly */
+.navbar-location {
+  margin-right: 1rem; /* Adjust as necessary */
+}
+
+.search-bar {
+  margin-right: 1rem; /* Adjust as necessary */
+}
+
+/* Style the hamburger button to ensure it's positioned correctly */
+.navbar-toggler {
+  position: absolute;
+  top: 1px; /* Adjust based on your design */
+  right: 1px; /* Adjust based on your design */
+  
+}
+
+/* Adjust the container for responsive behavior */
+.container-fluid {
+  position: relative; /* Ensure child elements are positioned relative to this container */
+}
+
+/* Ensure the navbar items align correctly on different screen sizes */
+@media (max-width: 992px) { /* Adjust the breakpoint based on your design */
+  .navbar-nav {
+    text-align: center;
+  }
+  .navbar-location {
+    display: none; /* Hide location on small screens if needed */
+  }
+}
+
+
+/* Ensure the navbar has a fixed position and spans the full width */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+}
+
+/* Flexbox layout for the navbar to align items properly */
+.container-fluid {
+  display: flex;
+  justify-content: space-between; /* Adjust alignment as needed */
+  align-items: center;
+}
+
+/* Align logo to the left */
+.navbar-left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Adjust the logo size if needed */
+.navbar-left img {
+  height: 10px; /* Adjust based on your design */
+}
+
+/* Ensure the navbar-toggler button is positioned correctly */
+.navbar-toggler {
+  position: absolute;
+  top: 15px; /* Adjust based on your design */
+  right: 15px; /* Adjust based on your design */
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) { /* Adjust the breakpoint based on your design */
+  .navbar-nav {
+    text-align: center;
+  }
+  .navbar-location {
+    display: none; /* Hide location on small screens if needed */
+  }
+}
+
+.nav2 {
+  padding: 0 1rem;
+}
+
+.navbar-brand img {
+  height: 40px;
+}
+
+.navbar-nav {
+  flex-direction: row;
+}
+
+.navbar-toggler {
+  margin-left: auto;
+}
+
+.search-bar {
+  margin-right: 1rem;
+}
+
+.navbar-location {
+  margin-right: 1rem;
+}
+
+@media (max-width: 992px) {
+  .search-bar {
+    margin-right: 0;
+  }
+}

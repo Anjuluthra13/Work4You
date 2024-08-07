@@ -231,7 +231,7 @@ const Dashboard = () => {
                                 <div className="col-sm  small-box card-7"  >
                                     <i className="fa fa-user  fa-2x left1  " />
                                     <div style={{ display: "block" }}>
-                                        <h5>Users</h5>
+                                        <h5><Link to='/users' style={{textDecoration:"none" , color:"#121212"}}> Users</Link></h5>
                                         <h5 style={{ fontSize: "20px", color: "#121212" }}>{getuserdata.length}</h5>
                                     </div>
 
@@ -239,7 +239,7 @@ const Dashboard = () => {
                                 <div className="col-sm small-box card-7">
                                     <i className="fa fa-archive fa-2x left1"></i>
                                     <div style={{ display: "block" }} >
-                                        <h5>Products</h5>
+                                        <h5><Link to='/products' style={{textDecoration:"none", color:"#121212" }} > Services </Link></h5>
                                         <h5 style={{ fontSize: "20px", color: "#121212" }}>{data.length}</h5>
 
                                     </div>
@@ -247,7 +247,7 @@ const Dashboard = () => {
                                 </div>
                                 <div className="col-sm small-box card-7">
                                     <i className="fa fa-bar-chart fa-2x left1" ></i>
-                                    <h5>Payments</h5>
+                                    <h5><Link to="/order" style={{textDecoration:"none" , color:"#121212" }} > Payments</Link></h5>
                                     <h5 style={{ fontSize: "20px", color: "#121212" }} >{getuserorder.length}</h5>
                                 </div>
                             </div>
@@ -260,7 +260,7 @@ const Dashboard = () => {
                                 <div className="col-sm  small-box card-7"  >
                                     <i className="fas fa-cart-arrow-down fa-2x left1  " />
                                     <div style={{ display: "block" }}>
-                                        <h5>Orders</h5>
+                                        <h5><Link to='/delivery' style={{textDecoration:"none", color:"#121212" }} > Orders </Link></h5>
                                         <h5 style={{ fontSize: "20px", color: "#121212" }}>{getuserdelivary.length}</h5>
                                     </div>
 
@@ -268,7 +268,7 @@ const Dashboard = () => {
                                 <div className="col-sm small-box card-7">
                                     <i className="fas fa-calendar fa-2x left1"></i>
                                     <div style={{ display: "block" }} >
-                                        <h5>Feedback</h5>
+                                        <h5><Link to='/complent' style={{textDecoration:"none", color:"#121212" }} > Feedback </Link></h5>
                                         <h5 style={{ fontSize: "20px", color: "#121212" }}>{getuserfeedback.length}</h5>
 
                                     </div>
@@ -276,8 +276,8 @@ const Dashboard = () => {
                                 </div>
                                 <div className="col-sm small-box card-7">
                                     <i className="fas fa-shopping-basket fa-2x left1" ></i>
-                                    <h5>
-                                    Subscription for month</h5>
+                                    <h5><Link to='/bookformonth' style={{textDecoration:"none", color:"#121212" }} >
+                                    Subscription for month</Link></h5>
                                     <h5 style={{ fontSize: "20px", color: "#121212" }} >{getusermonth.length}</h5>
                                 </div>
                             </div>

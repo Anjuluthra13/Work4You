@@ -34,7 +34,7 @@ const Loginadmin = () => {
   
         dispatchs({type:"admin", payload:true })
         window.alert("Login Successfull");
-        history.push("/users");
+        history.push("/admin");
     }
 
 

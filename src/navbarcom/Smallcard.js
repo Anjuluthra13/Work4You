@@ -11,8 +11,8 @@ import { Link } from 'react-router-dom'
 
 const Smallcard = () => {
     return (
-        <div className='row rowv4 card-5  ' style={{ borderRadius: "10px" , marginTop:"-2rem" , background:"white"}}>
-            <div className='row '>
+        <div className='row rowv5 card-5  ' style={{ borderRadius: "10px" , marginTop:"-2rem" , background:"white"}}>
+            <div className='row ' style={{marginLeft:"70px"}}>
                 <div className='col-lg-2 col-xl-2 col-md-4 col-sm-6 '>
                     <center>
 
@@ -63,18 +63,9 @@ const Smallcard = () => {
 
                         </Link>
                     </center>                  </div>
-                <div className='col-lg-2 col-xl-2 col-md-4 col-sm-6 '>
-
-                    <center>
-
-                        <Link to='/paint'>
-                            <img src={image5} className="zoom small-img-size" alt=""></img>
-
-                        </Link>
-                    </center>
-                </div>
+                
             </div>
-            <div className='row '>
+            <div className='row ' style={{marginLeft:"50px"}}>
                 <div className='col-lg-2 col-xl-2 col-md-4 col-sm-6 '>
 
                 </div>
@@ -87,14 +78,16 @@ const Smallcard = () => {
 
                         </Link>
                     </center>                  </div>
-                <div className='col-lg-2 col-xl-2 col-md-4 col-sm-6 '>
-                    <center>
-{/* 
-                        <Link to='/homemaid'>
-                            <img src={image5} className="zoom small-img-size" alt=""></img>
+                    <div className='col-lg-2 col-xl-2 col-md-4 col-sm-6 '>
 
-                        </Link> */}
-                    </center>                    </div>
+                    <center>
+
+                         <Link to='/paint'>
+                    <img src={image5} className="zoom small-img-size" alt=""></img>
+
+                        </Link>
+                    </center>
+                    </div>
                 <div className='col-lg-2 col-xl-2 col-md-4 col-sm-6 '>
                     <center>
 

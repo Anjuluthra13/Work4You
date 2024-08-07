@@ -1,37 +1,35 @@
-const mongooose = require('mongoose');
+const mongoose = require('mongoose');
 
-const userBook = new mongooose.Schema({
+const userBook = new mongoose.Schema({
     name: {
-        type:String,
+        type: String,
     },
     lastName: {
-        type:String,
+        type: String,
     },
     email: {
-        type:String,
+        type: String,
     },
     phone: {
-        
-        type:Number,
+        type: Number,
     },
     service: {
-        type:String,
+        type: String,
     },
-    area:{
-        type:String,
-
+    area: {
+        type: String,
     },
-    address:{
-        type:String,
+    address: {
+        type: String,
     },
+    // carrier: {
+    //     type: String,
+    // },
     date: {
         type: Date,
-        default: Date.now
+        default: Date.now,
     },
+});
 
-  
-
-
-})
-const book = mongooose.model('book', userBook);
-module.exports = book;
+const Book = mongoose.model('Book', userBook);
+module.exports = Book;
