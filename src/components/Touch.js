@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { async } from '@firebase/util';
+import React ,{ useEffect ,useState } from 'react'
+import { Link } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Touch = () => {
-    const [userData, setUserData] = useState({ name: "", email: "", phone: "", message: "" });
-    const [feedbacks, setFeedbacks] = useState([]);
 
-    // Fetch user data and feedback
+    const [userData, setUserData] = useState({name:"",email:"",phone:"",message:""});
+
     const userContact = async () => {
         try {
             const res = await fetch('/getdata', {
@@ -15,33 +15,30 @@ const Touch = () => {
                 headers: {
                     "Content-Type": "application/json"
                 },
+
             });
             const data = await res.json();
-            setUserData({ ...userData, name: data.name, email: data.email, phone: data.phone });
+            console.log(data);
+            setUserData({...userData , name:data.name,email:data.email,phone:data.phone});
 
-            if (res.status === 200) {
-                // Fetch feedback data
-                const feedbackRes = await fetch('/feedback', {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                });
-                const feedbackData = await feedbackRes.json();
-                setFeedbacks(feedbackData);
-            } else {
+            if (!res.status === 200) {
                 const error = new Error(res.error);
                 throw error;
             }
+
+
         } catch (err) {
             console.log(err);
+          
         }
-    };
+    }
+
 
     useEffect(() => {
         userContact();
     }, []);
 
+   
     const notify = () => toast.error("Please Fill data", {
         position: "top-center",
         autoClose: 1000,
@@ -52,7 +49,7 @@ const Touch = () => {
         progress: 0,
     });
 
-    const notifysum = () => toast.success("Feedback sent", {
+    const notifysum = () => toast.success("Feedback send", {
         position: "top-center",
         autoClose: 1000,
         hideProgressBar: false,
@@ -62,106 +59,117 @@ const Touch = () => {
         progress: 0,
     });
 
-    // Handle input changes
-    const handleInputs = (e) => {
-        const name = e.target.name;
+
+    //storing data   
+    
+    const handleInputs = (e) =>{
+        const name= e.target.name;
         const value = e.target.value;
-        setUserData({ ...userData, [name]: value });
-    };
+         setUserData({ ...userData , [name]:value });  
+    }  
 
-    // Submit feedback form
-    const contactForm = async (e) => {
+    //send data to backend
+
+    const contactForm = async (e) =>{
         e.preventDefault();
-        const { name, email, phone, message } = userData;
-
-        try {
-            const res = await fetch('/feedback', {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ name, email, phone, message })
-            });
-            const data = await res.json();
-
-            if (!message) {
+             const {name ,email,phone ,message} = userData;
+         
+             const res = await fetch('/massage',{
+                 method:"POST",
+                 headers:{  
+                     "Content-Type":"application/json"
+                 },
+                 body:JSON.stringify({
+                     name, email ,phone , message
+                 })
+             });
+             const data = await res.json();
+             
+             if(!message){
                 notify();
-            } else {
+             }
+             else{
                 notifysum();
-                setUserData({ ...userData, message: "" });
+                 setUserData({ ...userData, message:""}); 
+             }
 
-                // Refresh feedbacks after sending
-                await userContact(); // Ensure userContact completes before proceeding
-            }
-        } catch (err) {
-            console.log(err);
-        }
-    };
+
+
+       }
 
     return (
         <>
             <div className="container">
-                <div className="row rowv3">
-                    <div className="col-sm small-box card-7">
-                        <i className="fa fa-phone-square fa-2x left1" />
+                <div className="row rowv3" >
+                    <div className="col-sm  small-box card-7"  >
+                        <i className="fa fa-phone-square  fa-2x left1  " />
                         <div style={{ display: "block" }}>
                             <h5>Phone No</h5>
-                            <p style={{ fontSize: "13px", color: "#121212" }}>+918595957070</p>
+                            <p style={{ fontSize: "13px", color: "#121212"  }}>+918585858585</p>
                         </div>
+
                     </div>
                     <div className="col-sm small-box card-7">
                         <i className="far fa-envelope fa-2x left1"></i>
-                        <div style={{ display: "block" }}>
+                        <div style={{ display: "block" }} >
                             <h5>Email</h5>
-                            <p style={{ fontSize: "13px", color: "#121212" }}>oak.work4you@gmail.com</p>
+                            <p style={{ fontSize: "13px", color: "#121212"  }}>oak.work4you@gmail.com</p>
+
                         </div>
+
                     </div>
                     <div className="col-sm small-box card-7">
-                        <i className="fas fa-map-marker-alt fa-2x left1"></i>
+                        <i className="fas fa-map-marker-alt fa-2x left1" ></i>
                         <h5>Location</h5>
-                        <p style={{ fontSize: "13px", color: "#121212" }}>D-1, Block D, Sector 1, Noida,<br />Uttar Pradesh 201301</p>
+                        <p style={{ fontSize: "13px", color: "#121212"  }} >NSTI Noida</p>
                     </div>
                 </div>
             </div>
 
-            <div className='container' style={{ marginTop: "-1rem" }}>
-                <div className='row rowv4 card-6' style={{ background: "#c5c3c3" }}>
-                    <div className='col-lg-10 offset-lg-1'>
+
+            <div className='container ' style={{marginTop:"-1rem"}}>
+                <div className='row rowv4 card-6' style={{ background:"#c5c3c3"}}>
+                    <div className='col-lg-10 offset-lg-1 ' >
                         <div className='contact_form_container py-5'>
                             <div className='contact_form_title left'>
-                                Feedback
+                              Feedback
                             </div>
 
-                            <form method="POST">
-                                <div className='contact_form_name d-flex justify-between align-item'>
-                                    <input type='text' id="contact_form_name" className='contact-form-name input_field' name='name' value={userData.name} onChange={handleInputs} placeholder='Your Name' required />
-                                    <input type='email' id="contact_form_email" className='contact-form-email input_field' name='email' value={userData.email} onChange={handleInputs} placeholder='Your Email' required />
-                                    <input type='number' id="contact_form_phone" className='contact-form-phone input_field' name='phone' value={userData.phone} onChange={handleInputs} placeholder='Your Phone' required />
-                                </div>
-                                <div className='contact_form_text'>
-                                    <textarea name='message' value={userData.message} onChange={handleInputs} id='' cols="30" rows="8" placeholder='Message'></textarea>
-                                </div>
-                                <Link type="submit" onClick={contactForm} className="btn btn-dark" style={{ marginTop: "2rem" }}>Send Message</Link>
-                            </form>
+                             <form method="POST" >
+                                     <div className=' contact_form_name d-flex justify-between align-item '>
+                                              <input type='text' id="contact_form_name " className='contact-form-name  input_field' name='name' value={userData.name} onChange={handleInputs} placeholder='Your Name' required='true'></input>
+                                              <input type='email' id="contact_form_email " className='contact-form-email  input_field' name='email' value={userData.email} onChange={handleInputs}  placeholder='Your Email' required='true'></input>
+                                              <input type='number' id="contact_form_phone" className='contact-form-phone   input_field'  name='phone' value={userData.phone} onChange={handleInputs} placeholder='Your Phone' required='true'></input>
+                                     </div>
+                                     <div className='contact_form_text'>
+
+                                        <textarea type='text' name='message' value={userData.message} onChange={handleInputs} id='' cols="30" rows="8" placeholder='Message'> </textarea>
+
+                                     </div>  
+                                     
+                                <Link type="submit" onClick={contactForm} className="btn btn-dark"   style={{marginTop:"2rem"}}>Send Meassage</Link>
+
+                             </form>
                         </div>
                     </div>
-                </div>
 
-                <div className='feedback-section'>
-                    <h3>Previous Feedbacks</h3>
-                    <ul>
-                        {feedbacks.map((feedback, index) => (
-                            <li key={index}>
-                                <strong>{feedback.name}</strong> ({feedback.email}): {feedback.message}
-                            </li>
-                        ))}
-                    </ul>
                 </div>
             </div>
 
-            <ToastContainer />
-        </>
-    );
-};
 
-export default Touch;
+
+
+        </>
+
+
+
+
+
+
+
+
+    )
+}
+
+export default Touch
+

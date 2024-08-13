@@ -50,14 +50,6 @@ const Popuplogin = () => {
           </div>
         </div>
       </div>
-
-
-
-
-
-
-
-
     </>
   )
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { Link } from 'react-router-dom';
 import image1 from "../image/babysitting.jpg"
 import image15 from "../image/homemaid.jpg"
@@ -21,7 +21,34 @@ import Smallcard from '../navbarcom/Smallcard';
 
 const Home = () => {
 
+  //feedback
+  const [getuserdata, setUserdata] = useState([]);
+
+
+    const getdata = async () => {
+
+        const res = await fetch("/get-massage", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+
+        const data = await res.json();
+        console.log(data);
+
+        if (res.status === 422 || !data) {
+            console.log("error ");
+
+        } else {
+            setUserdata(data)
+            console.log("get data");
+
+        }
+    }
+
   const [userName, setUserName] = useState('');
+  const [feedbackMessage, setFeedbackMessage] = useState(''); // State for feedback message
 
   const userHome = async () => {
     try {
@@ -30,33 +57,29 @@ const Home = () => {
         headers: {
           "Content-Type": "application/json"
         },
-
       });
+      
+
       const data = await res.json();
       console.log(data);
       setUserName(data.name);
-
-
+      setFeedbackMessage("Welcome back! We hope you find what you need."); // Example feedback message
     } catch (err) {
       console.log(err);
-
     }
   }
 
+  
 
   useEffect(() => {
     userHome();
+    getdata();
   }, []);
 
 
 
   return (
     <>
-
-
-
-
-
 
 <div className='background9  rowv2'>
 
@@ -441,6 +464,37 @@ const Home = () => {
     </div>
   </center>
 </div>
+<div className="card-5" style={{ width: '100%', padding: '20px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', borderRadius: '10px' }}>                        
+    <div style={{ maxHeight: '400px', overflowY: 'auto' }}>
+        <table className="table table-striped" style={{ width: '100%', borderCollapse: 'collapse' }}>
+            <thead>
+                <tr className="table-active" style={{ backgroundColor: '#f8f9fa' }}>
+                    <th scope="col" style={{ padding: '10px', textAlign: 'left' }}>
+                        <h5 style={{ margin: '0', fontSize: '18px' }}>Username</h5>
+                    </th>
+                    <th scope="col" style={{ padding: '10px', textAlign: 'left' }}>
+                        <h5 style={{ margin: '0', fontSize: '18px' }}>Message</h5>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {
+                    getuserdata.map((element, id) => {
+                        return (
+                            <React.Fragment key={id}>
+                                <tr style={{ borderBottom: '1px solid #dee2e6' }}>
+                                    <td style={{ fontSize: '17px', padding: '10px' }}>{element.name}</td>
+                                    <td style={{ fontSize: '17px', padding: '10px' }}>{element.message}</td>
+                                </tr>
+                            </React.Fragment>
+                        )
+                    })
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
       <div className='row head2 footer-booknow' >
 
         <div className='col-lg-8 col-md-8 ' style={{ color: "white", marginTop: "1.2rem", marginBottom: "1.2rem" }} >

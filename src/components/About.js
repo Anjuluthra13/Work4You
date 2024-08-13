@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
@@ -99,7 +98,7 @@ const About = () => {
                         <p style={{ fontSize: "20px", marginBottom: "0px", marginTop: "16px", fontFamily: "poppins" }}>Email:</p>
                             <input
                                 type="text"
-                                name="firstName"
+                                name="email"
                                 id=""
                                 style={{ height: "3rem" }}
                                 className="form-control card-5"
@@ -114,7 +113,7 @@ const About = () => {
                         <p style={{ fontSize: "20px", marginBottom: "0px", marginTop: "16px", fontFamily: "poppins" }}>Phone:</p>
                             <input
                                 type="text"
-                                name="firstName"
+                                name="phone"
                                 id=""
                                 style={{ height: "3rem" }}
                                 className="form-control card-5"
@@ -165,7 +164,7 @@ const About = () => {
                         <p style={{ fontSize: "20px", marginBottom: "0px", marginTop: "16px", fontFamily: "poppins" }}>Country:</p>
                             <input
                                 type="text"
-                                name="firstName"
+                                name="country"
                                 id=""
                                 style={{ height: "3rem" }}
                                 className="form-control card-5"

@@ -1374,3 +1374,7 @@ ul li ul.dropdown li{
 
 }
 
+.modal-backdrop {
+  display: none !important; /* Completely hides the backdrop */
+}
+

@@ -70,7 +70,8 @@ import Electric from "./navbarcom/Electrician";
 import Paint from "./navbarcom/painter";
 import Plumber from "./navbarcom/plumber";
 import Pest from "./navbarcom/pestcontrol";
-import Carpenter from "./navbarcom/carpenter"
+import Carpenter from "./navbarcom/carpenter";
+import Checkout from "./navbarcom/checkout";
 export const UserContext = createContext();
 
 
@@ -271,6 +272,10 @@ function App({ location }) {
             </Route>
             <Route exact path="/carpenter">
               <Carpenter></Carpenter>
+            </Route>
+
+            <Route exact path="/checkout">
+              <Checkout></Checkout>
             </Route>
             {/* <div className="background4"  style={{width:"103%",marginLeft:"0rem"}}> 
           <div className="tranbox4">

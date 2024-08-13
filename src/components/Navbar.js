@@ -10,7 +10,7 @@ import { getUserLocation, fetchCityName } from './locationUtils';
 import './styles.css';
 import { Badge, Button, Dropdown, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { CartState } from "../reducer/Context";
-
+import Popuplogin from './Popuplogin';
 const MyNavbar = () => {
   const { state: { cart }, dispatch } = CartState();
   const { state } = useContext(UserContext);
@@ -174,10 +174,14 @@ const MyNavbar = () => {
   };
 
   return (
+    
     <Navbar bg={theme === 'dark' ? 'dark' : 'light'} variant={theme} expand="lg" fixed="top" expanded={!isNavbarCollapsed}>
+      <Popuplogin />
       <Navbar.Brand as={Link} to="/" onClick={handleNavLinkClick}>
+      
         <img src={image} alt="logo" style={{ height: '40px' }} />
       </Navbar.Brand>
+      
       <Navbar.Toggle aria-controls="basic-navbar-nav" className={theme === 'dark' ? 'text-light' : 'text-dark'} onClick={() => setIsNavbarCollapsed(!isNavbarCollapsed)} />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
