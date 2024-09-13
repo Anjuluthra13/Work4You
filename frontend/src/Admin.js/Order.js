@@ -4,14 +4,10 @@ import { useState, useEffect } from 'react'
 import { Button } from 'react-bootstrap'
 
 const Order = () => {
-
-
-
     const [getuserdata, setUserdata] = useState([]);
 
     const getdata = async () => {
-
-        const res = await fetch("/get-order", {
+        const res = await fetch("/api/hire", {  // Update this line to match your endpoint
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -22,18 +18,16 @@ const Order = () => {
         console.log(data);
 
         if (res.status === 422 || !data) {
-            console.log("error ");
-
+            console.log("Error fetching hire requests.");
         } else {
-            setUserdata(data)
-            console.log("get data");
-
+            setUserdata(data);
+            console.log("Data fetched successfully.");
         }
-    }
+    };
 
     useEffect(() => {
         getdata();
-    }, [])
+    }, []);
 
     return (
         <>

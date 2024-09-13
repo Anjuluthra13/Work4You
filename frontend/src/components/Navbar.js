@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect, useRef } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { UserContext } from '../App';
 import image from "../image/work4youlogo.png";
-import { FaShoppingCart, FaSearch, FaSun, FaMoon, FaTimes } from "react-icons/fa";
+import { FaShoppingCart, FaSearch, FaSun, FaMoon, FaTimes, FaMicrophone } from "react-icons/fa";
 import { MdLocationOn } from "react-icons/md";
 import { AiFillDelete } from "react-icons/ai";
 import image2 from "../Imagesmall/maidimage.jpg";
@@ -10,7 +10,6 @@ import { getUserLocation, fetchCityName } from './locationUtils';
 import './styles.css';
 import { Badge, Button, Dropdown, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { CartState } from "../reducer/Context";
-import Popuplogin from './Popuplogin';
 
 const MyNavbar = () => {
   const { state: { cart }, dispatch } = CartState();
@@ -24,7 +23,8 @@ const MyNavbar = () => {
   const suggestionsRef = useRef(null);
   const history = useHistory();
   const [isNavbarCollapsed, setIsNavbarCollapsed] = useState(true);
-  const [openDropdown, setOpenDropdown] = useState(null); // Manage which dropdown is open
+  const [openDropdown, setOpenDropdown] = useState(null);
+  const [isListening, setIsListening] = useState(false);
 
   useEffect(() => {
     const userHome = async () => {
@@ -74,20 +74,19 @@ const MyNavbar = () => {
   };
 
   const searchQueryToRouteMap = {
-    'Driver': '/driver',
-    'Babysitter': '/babycare',
-    'Cooking': '/cooking',
-    'Homeservice': '/homemaid',
-    'Pest': '/pest',
-    'Cleaning': '/clean',
-    'Painter': '/paint',
-    'Carpenter': '/carpenter'
+    'driver.': '/driver',
+    'babysitter.': '/babycare',
+    'cooking.': '/cooking',
+    'homeservice.': '/homemaid',
+    'pest.': '/pest',
+    'cleaning.': '/clean',
+    'painter.': '/paint',
+    'carpenter.': '/carpenter'
   };
 
   const services = Object.keys(searchQueryToRouteMap);
 
   useEffect(() => {
-    // Reset search query when navigating to the home page
     if (history.location.pathname === '/') {
       setSearchQuery('');
       setSuggestions([]);
@@ -97,13 +96,13 @@ const MyNavbar = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    const route = searchQueryToRouteMap[searchQuery];
+    const route = searchQueryToRouteMap[searchQuery.toLowerCase()];
     if (route) {
       history.push(route);
     } else {
       history.push('/notfound');
     }
-    setIsNavbarCollapsed(true); // Close the navbar after search
+    setIsNavbarCollapsed(true);
   }
 
   const handleInputChange = (e) => {
@@ -136,25 +135,25 @@ const MyNavbar = () => {
       setSearchQuery(suggestion);
       setSuggestions([]);
       setShowSuggestions(false);
-      const route = searchQueryToRouteMap[suggestion];
+      const route = searchQueryToRouteMap[suggestion.toLowerCase()];
       if (route) {
         history.push(route);
       }
-      setIsNavbarCollapsed(true); // Close the navbar after clicking a suggestion
+      setIsNavbarCollapsed(true);
     }
   }
 
   const handleClearSearch = (e) => {
-    e.stopPropagation(); // Prevents the click from bubbling up to parent elements
+    e.stopPropagation();
     setSearchQuery('');
     setSuggestions([]);
     setShowSuggestions(false);
-    history.push('/'); // Redirect to home page
-    setIsNavbarCollapsed(true); // Close the navbar after clearing search
+    history.push('/');
+    setIsNavbarCollapsed(true);
   }
 
   const handleNavLinkClick = () => {
-    setIsNavbarCollapsed(true); // Collapse the navbar when a link is clicked
+    setIsNavbarCollapsed(true);
   };
 
   const handleDropdownClick = (menu) => {
@@ -163,33 +162,81 @@ const MyNavbar = () => {
 
   const handleDropdownItemClick = (path) => {
     history.push(path);
-    setIsNavbarCollapsed(true); // Close the navbar after clicking a dropdown item
-    setOpenDropdown(null); // Close the dropdown
+    setIsNavbarCollapsed(true);
+    setOpenDropdown(null);
   };
 
   const RenderMenu = () => {
+    
       return (
         <NavDropdown title={userName.toUpperCase()} id="basic-nav-dropdown" onClick={handleNavLinkClick}>
           <NavDropdown.Item as={Link} to="/about" onClick={handleNavLinkClick}>Profile</NavDropdown.Item>
           <NavDropdown.Item as={Link} to="/logout" onClick={handleNavLinkClick}>Logout</NavDropdown.Item>
         </NavDropdown>
       );
+    
+  };
+
+  const handleVoiceSearch = () => {
+    const recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!recognition) {
+      alert('Speech recognition not supported in this browser.');
+      return;
+    }
+
+    const recognitionInstance = new recognition();
+    recognitionInstance.lang = 'en-US';
+    recognitionInstance.interimResults = false;
+    recognitionInstance.maxAlternatives = 1;
+
+    recognitionInstance.onresult = (event) => {
+      const voiceInput = event.results[0][0].transcript;
+      console.log('Voice input:', voiceInput); // Debugging output
+      setSearchQuery(voiceInput);
+      const route = searchQueryToRouteMap[voiceInput.toLowerCase()];
+      if (route) {
+        history.push(route);
+      } else {
+        history.push('/notfound');
+      }
+      setIsNavbarCollapsed(true);
+
+      // Update suggestions based on voice input
+      const filteredSuggestions = services.filter(service =>
+        service.toLowerCase().startsWith(voiceInput.toLowerCase())
+      );
+      setSuggestions(filteredSuggestions.length > 0 ? filteredSuggestions : ['No match']);
+      setShowSuggestions(true);
+    };
+
+    recognitionInstance.onerror = (event) => {
+      console.error('Speech recognition error:', event.error);
+    };
+
+    recognitionInstance.onend = () => {
+      setIsListening(false);
+    };
+
+    if (isListening) {
+      recognitionInstance.stop();
+    } else {
+      recognitionInstance.start();
+      setIsListening(true);
+    }
   };
 
   return (
-    
     <Navbar bg={theme === 'dark' ? 'dark' : 'light'} variant={theme} expand="lg" fixed="top" expanded={!isNavbarCollapsed}>
-      <Popuplogin />
       <Navbar.Brand as={Link} to="/" onClick={handleNavLinkClick}>
-      
         <img src={image} alt="logo" style={{ height: '40px' }} />
       </Navbar.Brand>
-      
       <Navbar.Toggle aria-controls="basic-navbar-nav" className={theme === 'dark' ? 'text-light' : 'text-dark'} onClick={() => setIsNavbarCollapsed(!isNavbarCollapsed)} />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
           <Nav.Link as={Link} to="/" onClick={handleNavLinkClick}>HOME</Nav.Link>
           <Nav.Link as={Link} to="/aboutus" onClick={handleNavLinkClick}>ABOUT US</Nav.Link>
+          <Nav.Link as={Link} to="/locals" onClick={handleNavLinkClick}>APPLY FOR JOB</Nav.Link>
+
           <NavDropdown 
             title="SERVICES" 
             id="basic-nav-dropdown" 
@@ -199,7 +246,8 @@ const MyNavbar = () => {
             <NavDropdown.Item onClick={() => handleDropdownItemClick('/homemaid')}>Home Service</NavDropdown.Item>
             <NavDropdown.Item onClick={() => handleDropdownItemClick('/book')}>Service for Month</NavDropdown.Item>
           </NavDropdown>
-          <NavDropdown 
+          
+          {/* <NavDropdown 
             title="APPLY FOR JOB" 
             id="basic-nav-dropdown" 
             show={openDropdown === 'apply'} 
@@ -207,7 +255,7 @@ const MyNavbar = () => {
           >
             <NavDropdown.Item onClick={() => handleDropdownItemClick('/contact')}>Professionals</NavDropdown.Item>
             <NavDropdown.Item onClick={() => handleDropdownItemClick('/locals')}>Locals</NavDropdown.Item>
-          </NavDropdown>
+          </NavDropdown> */}
           <NavDropdown 
             title="SUPPORT" 
             id="basic-nav-dropdown" 
@@ -222,8 +270,7 @@ const MyNavbar = () => {
           <MdLocationOn size={20} />
           <span style={{ marginLeft: '0.5rem' }}>{city}</span>
         </div>
-        <form className="d-flex search-bar" onSubmit={handleSearch} style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
-          <FaSearch style={{ position: 'absolute', left: '10px', color: '#888', pointerEvents: 'none' }} />
+        <form className="d-flex search-bar" onSubmit={handleSearch} style={{ position: 'relative' }}>
           <input
             type="text"
             className="form-control"
@@ -232,14 +279,20 @@ const MyNavbar = () => {
             onChange={handleInputChange}
             onFocus={handleFocus}
             onBlur={handleBlur}
-            style={{ width: '200px', height: '30px', paddingLeft: '40px' }} // Adjust padding to avoid overlap with search icon
+            style={{ paddingLeft: '40px' }} // Adjust padding to accommodate icons
           />
+          <FaSearch style={{ position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)', color: '#888', pointerEvents: 'none' }} />
           {searchQuery && (
             <FaTimes
-              style={{ position: 'absolute', right: '10px', color: '#888', cursor: 'pointer' }}
+              style={{ position: 'absolute', right: '40px', top: '50%', transform: 'translateY(-50%)', color: '#888', cursor: 'pointer' }}
               onClick={handleClearSearch}
             />
           )}
+          <FaMicrophone
+            size={20}
+            style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', cursor: 'pointer', color: theme === 'dark' ? 'white' : 'black' }}
+            onClick={handleVoiceSearch}
+          />
           {showSuggestions && (
             <ul className="suggestions-list" ref={suggestionsRef} style={{ position: 'absolute', top: '100%', left: 0, zIndex: 1000, backgroundColor: 'white', border: '1px solid #ddd', padding: 0, margin: 0, listStyle: 'none' }}>
               {suggestions.length > 0 ? suggestions.map(suggestion => (

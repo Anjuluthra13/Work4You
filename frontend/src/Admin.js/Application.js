@@ -8,24 +8,27 @@ const Application = () => {
 
 
     const getdata = async () => {
+        try {
+            const token = localStorage.getItem('token');
+            const res = await fetch("/api/local", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                }
+            });
 
-        const res = await fetch("/get-application", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
+            const data = await res.json();
+            console.log(data);
+
+            if (res.status === 422 || !data) {
+                console.log("Error fetching data");
+            } else {
+                setUserdata(data);
+                console.log("Data fetched successfully");
             }
-        });
-
-        const data = await res.json();
-        console.log(data);
-
-        if (res.status === 422 || !data) {
-            console.log("error ");
-
-        } else {
-            setUserdata(data)
-            console.log("get data");
-
+        } catch (error) {
+            console.error("Error:", error);
         }
     }
 
@@ -65,19 +68,7 @@ const Application = () => {
                                                 <div className="row">
 
 
-                                                    <div className="col-12 col-lg-2 contact-input-feild" style={{ marginTop: "-3rem", color: " ", fontWeight: "bold" }}>
-                                                        <p style={{ fontSize: "20px", marginBottom: "0px", marginTop: "16px", fontFamily: "poppins" }}>qualification</p>
-                                                        <input
-                                                            type="text"
-                                                            name="firstName"
-                                                            id=""
-                                                            className="form-control card-5"
-                                                            placeholder=""
-                                                            value={element.qualification}
-
-                                                        />
-
-                                                    </div>
+                                                    
                                                     <div className="col-12 col-lg-2 contact-input-feild" style={{ marginTop: "-3rem", color: " ", fontWeight: "bold" }}>
                                                         <p style={{ fontSize: "20px", marginBottom: "0px", marginTop: "16px", fontFamily: "poppins" }}>email</p>
                                                         <input
@@ -130,19 +121,7 @@ const Application = () => {
                                                         />
 
                                                     </div>
-                                                    <div className="col-12 col-lg-2 contact-input-feild" style={{ marginTop: "-3rem", color: " ", fontWeight: "bold" }}>
-                                                        <p style={{ fontSize: "20px", marginBottom: "0px", marginTop: "16px", fontFamily: "poppins" }}>Age</p>
-                                                        <input
-                                                            type="number"
-                                                          
-                                                            id=""
-                                                            className="form-control"
-
-                                                            value={element.age}
-
-                                                        />
-
-                                                    </div>
+                                                    
 
 
 
@@ -175,54 +154,9 @@ const Application = () => {
 
                                                             />
                                                         </div>
-                                                        <div className="col-12 col-lg-2 contact-input-feild" style={{ marginTop: "-2.5rem", color: " ", fontWeight: "bold" }}>
-                                                            <p style={{ fontSize: "20px", marginBottom: "0px", fontFamily: "poppins" }}>gender</p>
-                                                            <input
-                                                                type="text"
-                                                                name="email"
-                                                                id=""
-                                                                className="form-control"
-                                                                placeholder=""
-                                                                value={element.gender}
-
-                                                            />
-                                                        </div>
-                                                        <div className="col-12 col-lg-2 contact-input-feild" style={{ marginTop: "-2.5rem", color: " ", fontWeight: "bold" }}>
-                                                            <p style={{ fontSize: "20px", marginBottom: "0px", fontFamily: "poppins" }}>language</p>
-                                                            <input
-                                                                type="text"
-                                                             
-                                                                id=""
-                                                                className="form-control"
-                                                                placeholder=""
-                                                                value={element.language}
-
-                                                            />
-                                                        </div>
-                                                        <div className="col-12 col-lg-2 contact-input-feild" style={{ marginTop: "-2.5rem", color: " ", fontWeight: "bold" }}>
-                                                            <p style={{ fontSize: "20px", marginBottom: "0px", fontFamily: "poppins" }}>message</p>
-                                                            <input
-                                                                type="text"
-                                                               
-                                                                id=""
-                                                                className="form-control"
-                                                                placeholder=""
-                                                                value={element.message}
-
-                                                            />
-                                                        </div>
-                                                        <div className="col-12 col-lg-2 contact-input-feild" style={{ marginTop: "-2.5rem", color: " ", fontWeight: "bold" }}>
-                                                            <p style={{ fontSize: "20px", marginBottom: "0px", fontFamily: "poppins" }}>Married status</p>
-                                                            <input
-                                                                type="text"
-                                                               
-                                                                id=""
-                                                                className="form-control"
-                                                                placeholder=""
-                                                                value={element.status}
-
-                                                            />
-                                                        </div>
+                                                        
+                                                      
+                                                        
                                                     </div>
 
 

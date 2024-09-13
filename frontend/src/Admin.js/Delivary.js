@@ -6,7 +6,7 @@ const Delivary = () => {
     const [getuserdata, setUserdata] = useState([]);
 
     const getdata = async () => {
-        const res = await fetch("/get-delivary", {
+        const res = await fetch("http://localhost:8080/api/hire", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"

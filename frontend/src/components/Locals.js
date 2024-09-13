@@ -57,11 +57,13 @@ progress: 0,
   const submitData = async (event) => {
     event.preventDefault();
     const { name,  email, phone, service , area , address } = userData;
-    
-    const res = await fetch('/local', {
+
+    const token = localStorage.getItem('token');
+    const res = await fetch('http://localhost:8080/api/local', {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
       },
       body: JSON.stringify({
         name,  email, phone, service, area , address

@@ -6,7 +6,7 @@ const Complent = () => {
 
     const getdata = async () => {
         try {
-            const res = await fetch("http://localhost:8080/api/feedback", { // Ensure this matches your backend endpoint
+            const res = await fetch("http://localhost:8080/api/feedback", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -73,7 +73,7 @@ const Complent = () => {
                                                             <td style={{ fontSize: "17px" }}>{element.email}</td>
                                                             <td style={{ fontSize: "17px" }}>{element.phone}</td>
                                                             <td style={{ fontSize: "17px" }}>{element.message}</td>
-                                                            <td style={{ fontSize: "17px" }}>{element.date}</td>
+                                                            <td style={{ fontSize: "17px" }}>{new Date(element.createdAt).toLocaleString()}</td> {/* Format the date */}
                                                         </tr>
                                                     );
                                                 })

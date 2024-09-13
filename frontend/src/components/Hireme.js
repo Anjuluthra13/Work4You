@@ -1,10 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import emailjs from '@emailjs/browser';
 import { CartState } from "../reducer/Context";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import axios from 'axios';
 
 const Hireme = () => {
     const formRef = useRef();
@@ -13,9 +12,9 @@ const Hireme = () => {
         name: "",
         id: "",
         email: "",
-        altEmail: "",  // New field for alternative email
+        altEmail: "",
         phone: "",
-        altPhone: "",  // New field for alternative phone
+        altPhone: "",
         amount: "",
         state: "",
         city: "",
@@ -25,52 +24,41 @@ const Hireme = () => {
         address: "",
         service: "",
     });
+    
+
     const [total, setTotal] = useState();
     const [service, setService] = useState();
     const {
         state: { cart },
-        dispatch,
     } = CartState();
 
     useEffect(() => {
-        setTotal(
-            cart.reduce((acc, curr) => acc + Number(curr.price) * curr.qty, 0)
-        );
-    }, [cart]);
-
-    useEffect(() => {
-        setService(
-            cart.reduce((acc, curr) => acc + String(curr.service) + ":" + String(curr.catagory) + "," ,"")
-        );
+        setTotal(cart.reduce((acc, curr) => acc + Number(curr.price) * curr.qty, 0));
+        setService(cart.reduce((acc, curr) => `${acc}${curr.service}:${curr.category},`, ""));
     }, [cart]);
 
     const callAboutPage = async () => {
         try {
-            const token = localStorage.getItem('token'); // Assume token is stored in localStorage
-    
+            const token = localStorage.getItem('token');
             const res = await fetch('http://localhost:8080/api/auth/getdata', {
                 method: "GET",
                 headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}` // Include JWT token
-                },
-                credentials: "include"
+                    Authorization: `Bearer ${token}`
+                }
             });
-    
             const data = await res.json();
-            console.log(data);
-            setUserData(data);
-    
-            if (res.status !== 200) {
-                throw new Error(res.error);
-            }
-    
+            console.log("User data:", data);  // Log the response to check if _id is present
+            setUserData(prev => ({
+                ...prev,
+                ...data,
+                id: data.id // Ensure this is the correct field name
+            }));
         } catch (err) {
             console.log(err);
-            
         }
-    }
+    };
 
     useEffect(() => {
         callAboutPage();
@@ -81,85 +69,89 @@ const Hireme = () => {
         setUserData({ ...userData, [name]: value });
     };
 
-    const convertDateTime = (date, time) => {
-        const [hours, minutes] = time.split(':');
-        const newDate = new Date(date);
-        newDate.setHours(hours);
-        newDate.setMinutes(minutes);
-        return newDate;
-    };
 
-    const sendEmail = async (e) => {
-        e.preventDefault();
-        try {
-            const result = await emailjs.sendForm(
-                'service_atgjewh', // Replace with your EmailJS service ID
-                'template_xxew3mt', // Replace with your EmailJS template ID
-                e.target,
-                '5dNBwGLVf_4otvCwZ' // Replace with your EmailJS user ID
-            );
-            console.log('Email successfully sent!', result.status, result.text);
-        } catch (error) {
-            console.error('There was an error sending the email:', error);
-        }
-    }
+    const convertDateTime = (date, time) => {
+        return new Date(`${date}T${time}:00`);
+    };
 
     const submitData = async (event) => {
         event.preventDefault();
-        const { name, phone, altPhone, email, altEmail, amount, id, city, state, etime, stime, date, address, service } = userData;
-
+    
+        // Destructure user data
+        const { name, phone, email, altEmail, amount, city, state, stime, etime, date, address, service } = userData;
+    
+        // Convert start and end times into ISO format using the provided date and time
         const startDateTime = convertDateTime(date, stime);
         const endDateTime = convertDateTime(date, etime);
         const currentDateTime = new Date();
-
-        if (!name || !id || !email || !phone || !amount || !city || !state || !stime || !etime || !date || !address || !service) {
-            toast.error("Please fill in all required fields", {
-                position: "top-center",
-                autoClose: 1000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: 0,
-            });
+    
+        // Validate the form input
+        if (!name || !email || !phone || !amount || !city || !state || !stime || !etime || !date || !address || !service) {
+            toast.error("Please fill in all required fields", { autoClose: 1000 });
         } else if (startDateTime < currentDateTime || endDateTime < currentDateTime) {
-            toast.error("Date and time should not be before the current date and time", {
-                position: "top-center",
-                autoClose: 1000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: 0,
-            });
+            toast.error("Date and time should not be before the current date and time", { autoClose: 1000 });
         } else {
-            toast.success("Your booking has been submitted successfully", {
-                position: "top-center",
-                autoClose: 1000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: 0,
-            });
-            setUserData({ ...userData });
+            // Show success toast for submission
+            toast.success("Your booking has been submitted successfully", { autoClose: 1000 });
+    
+            // Send email notification (if needed)
             await sendEmail(event);
-            const token = localStorage.getItem('token');
-            const res = await fetch('http://localhost:8080/api/hire', {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}` 
-                },
-                body: JSON.stringify({
-                    name, phone, altPhone, email, altEmail, amount, id, city, state, startDateTime: startDateTime.toISOString(), endDateTime: endDateTime.toISOString(), date, address, service
-                })
-            });
-            const data = await res.json();
+    
+            try {
+                // Retrieve token from localStorage
+                const token = localStorage.getItem('token');
+    
+                // Send the hire request to the backend API
+                const response = await fetch('http://localhost:8080/api/hire', {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        ...userData, // Spread user data
+                        startDateTime: startDateTime.toISOString(), // Send in ISO format
+                        endDateTime: endDateTime.toISOString() // Send in ISO format
+                    })
+                });
+    
+                // Parse the response JSON
+                const result = await response.json();
+    
+                // Check if the response is successful
+                if (response.ok) {
+                    // Log the hire request ID returned from MongoDB (_id)
+                    console.log('Hire Request ID:', result._id);
+    
+                    // Show success toast with the hire request ID
+                    toast.success(`Hire Request submitted.`);
+                } else {
+                    // Show error toast with a custom error message
+                    toast.error(`Error: ${result.message || 'Failed to submit hire request'}`, { autoClose: 2000 });
+                }
+            } catch (error) {
+                // Handle any errors that occurred during fetch
+                console.error("Error submitting hire request:", error);
+                toast.error("Failed to submit hire request. Please try again later.", { autoClose: 2000 });
+            }
         }
     };
-
-    const getCurrentDateTime = () => {
+    
+    // Function to send an email notification via EmailJS
+    const sendEmail = async (e) => {
+        e.preventDefault();
+        try {
+            await emailjs.sendForm(
+                'service_atgjewh', // Your EmailJS service ID
+                'template_xxew3mt', // Your EmailJS template ID
+                e.target, // The target form
+                '5dNBwGLVf_4otvCwZ' // Your EmailJS user ID
+            );
+        } catch (error) {
+            console.error('Error sending email:', error);
+        }
+    };
+        const getCurrentDateTime = () => {
         const now = new Date();
         const year = now.getFullYear();
         const month = String(now.getMonth() + 1).padStart(2, '0');
@@ -198,13 +190,14 @@ const Hireme = () => {
                                             <div className="col-12 col-lg-4 contact-input-feild" style={{ marginTop: "-3rem", color: " ", fontWeight: "bold" }}>
                                                 <p style={{ fontSize: "20px", marginBottom: "0px", marginTop: "16px", fontFamily: "poppins" }}>User ID</p>
                                                 <input
-                                                    type="text"
-                                                    name="id"
-                                                    className="form-control"
-                                                    placeholder=""
-                                                    value={userData.id = userData._id}
-                                                    onChange={postUserData}
-                                                />
+    type="text"
+    name="id"
+    className="form-control"
+    placeholder=""
+    value={userData.id || ""}
+    onChange={postUserData}
+    readOnly // Make the ID field read-only if it's not supposed to be changed manually
+/>
                                             </div>
                                             <div className="col-12 col-lg-4 contact-input-feild" style={{ marginTop: "-3rem", color: " ", fontWeight: "bold" }}>
                                                 <p style={{ fontSize: "20px", marginBottom: "0px", marginTop: "16px", fontFamily: "poppins" }}>City</p>

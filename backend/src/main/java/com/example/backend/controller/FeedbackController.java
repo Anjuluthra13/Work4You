@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime; // Import for LocalDateTime
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +32,9 @@ public class FeedbackController {
             String email = authentication.getName(); // Get the authenticated user's email
             logger.info("Creating feedback for user: {}", email);
             
+            // Set the current date and time for the createdAt field
+            feedback.setCreatedAt(LocalDateTime.now()); 
+
             Feedback savedFeedback = feedbackService.saveFeedback(feedback);
             return ResponseEntity.ok(savedFeedback);
         } catch (Exception e) {

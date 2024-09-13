@@ -3,6 +3,8 @@ package com.example.backend.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
+
 @Document(collection = "feedbacks") // MongoDB collection name
 public class Feedback {
     @Id
@@ -11,15 +13,19 @@ public class Feedback {
     private String email;
     private String phone;
     private String message;
+    private LocalDateTime createdAt; // New field for the timestamp
 
     // Constructors
-    public Feedback() {}
+    public Feedback() {
+        this.createdAt = LocalDateTime.now(); // Set the timestamp when the object is created
+    }
 
     public Feedback(String name, String email, String phone, String message) {
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.message = message;
+        this.createdAt = LocalDateTime.now(); // Set the timestamp when the object is created
     }
 
     // Getters and Setters
@@ -61,5 +67,13 @@ public class Feedback {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }

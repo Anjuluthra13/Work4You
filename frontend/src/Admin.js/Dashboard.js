@@ -36,9 +36,9 @@ const Dashboard = () => {
 
     useEffect(() => {
         fetchData('http://localhost:8080/api/feedback', setUserfeedback);
-         fetchData('http://localhost:8080/api/auth/users', setUserdata);
+        fetchData('http://localhost:8080/api/auth/users', setUserdata);
         fetchData('/get-order', setUserorder);
-        fetchData('/get-delivary', setUserdelivery);
+        fetchData('http://localhost:8080/api/hire', setUserdelivery);
         fetchData('/get-book', setUsermonth);
         fetchData('/get-admin', setAdminData);
     }, []);

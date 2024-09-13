@@ -28,7 +28,7 @@ import Booknow from "./components/Booknow";
 import Tranfooter from "./components/Tranfooter";
 import Hireme from "./components/Hireme";
 import Aboutus from "./navbarcom/Aboutus";
-
+import Checkout from './navbarcom/checkout';
 import Driver from "./navbarcom/Driver";
 import Bote from "./components/Bote";
 import Book from "./components/Book"
@@ -63,7 +63,26 @@ import 'react-toastify/dist/ReactToastify.css'
 import Application from "./Admin.js/Application";
 import Showdelivary from "./navbarcom/Showdelivary";
 import Localadd from "./Admin.js/Localadd";
+import Babycare from "./navbarcom/babycare";
+import Clean from "./navbarcom/clean";
+import Cooking from "./navbarcom/cooking";
+import Electric from "./navbarcom/Electrician";
+import Paint from "./navbarcom/painter";
+import Plumber from "./navbarcom/plumber";
+import Pest from "./navbarcom/pestcontrol";
+import Carpenter from "./navbarcom/carpenter";
+
+
+
+// import ThankYou from './components/ThankYou';
+//  import VendorProfile from './vendor/VendorProfile';
+// import VendorRegister from './vendor/VendorRegister';
+// import VendorLogin from './vendor/VendorLogin';
+import Smallcard from "./navbarcom/Smallcard";
+// import VendorOrder from './vendor/VendorOrder';
+// import VendorComplete from "./vendor/VendorComplete";
 export const UserContext = createContext();
+
 
 
 
@@ -84,7 +103,7 @@ function App({ location }) {
 
         <Switch>
 
-
+     
             
      
         
@@ -102,12 +121,47 @@ function App({ location }) {
           <Route exact path="/application">
         <Application></Application>
           </Route>
+
+          {/* <Route exact path="/vendorprofile">
+        <VendorProfile></VendorProfile>
+        </Route>
+        
+        <Route exact path="/vendorlogin">
+        <VendorLogin></VendorLogin>
+        </Route>
+
+        <Route exact path="/vendorregister">
+        <VendorRegister></VendorRegister>
+        </Route>
+
+        <Route exact path="/vendororder">
+        <VendorOrder></VendorOrder>
+        </Route>
+
+        <Route exact path="/vendorcomplete">
+        <VendorComplete></VendorComplete>
+        </Route> */}
+
+        {/* <Route exact path="tablecomponent">
+          <TableComponent></TableComponent>
+        </Route> */}
+
+        {/* <Route exact path="/thank-you">
+        <ThankYou></ThankYou>
+          </Route> */}
+
           <Route exact path="/localadd">
         <Localadd></Localadd>
           </Route>
         
-
-        
+          <Route exact path="/checkout">
+        <Checkout></Checkout>
+          </Route>
+          
+          <Route exact path="/smallcard">
+              <Smallcard></Smallcard>
+            </Route>
+    
          
           <Route exact path="/order">
               <Order></Order>
@@ -183,8 +237,8 @@ function App({ location }) {
             <Route exact path="/pestcontrol">
               <Pestcontrol></Pestcontrol>
             </Route>
-            <Route exact path="/cleaning">
-              <Cleaning></Cleaning>
+            <Route exact path="/clean">
+              <Clean></Clean>
             </Route>
             <Route exact path="/cart">
               <Cart></Cart>
@@ -232,6 +286,37 @@ function App({ location }) {
               <Showorder></Showorder>
             </Route>
 
+
+            <Route exact path="/babycare">
+              <Babycare></Babycare>
+            </Route>
+
+            
+            <Route exact path="/Cooking">
+              <Cooking></Cooking>
+            </Route>
+            
+            <Route exact path="/clean">
+              <Clean></Clean>
+            </Route>
+
+            <Route exact path="/electric">
+              <Electric></Electric>
+            </Route>
+
+            <Route exact path="/Paint">
+              <Paint></Paint>
+            </Route>
+
+            <Route exact path="/Plumber">
+              <Plumber></Plumber>
+            </Route>
+            <Route exact path="/Pest">
+              <Pest></Pest>
+            </Route>
+            <Route exact path="/carpenter">
+              <Carpenter></Carpenter>
+            </Route>
             {/* <div className="background4"  style={{width:"103%",marginLeft:"0rem"}}> 
           <div className="tranbox4">
       

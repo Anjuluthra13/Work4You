@@ -3,7 +3,8 @@ import { Form } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './styles.css';
-import './Auth';
+import axios from 'axios';
+
 // Define package details
 const packageDetails = [
   {
@@ -87,11 +88,13 @@ const Book = () => {
 
   const callAboutPage = async () => {
     try {
-      const res = await fetch('/about', {
+      const token = localStorage.getItem('token');
+      const res = await fetch('http://localhost:8080/api/auth/getdata', {
         method: "GET",
         headers: {
           Accept: "application/json",
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
         },
         credentials: "include"
       });
@@ -111,7 +114,10 @@ const Book = () => {
     callAboutPage();
   }, []);
 
-  const notify = () => toast.error("Please fill all required fields", {
+
+
+
+  const notifyError = () => toast.error("Please fill all required fields", {
     position: "top-center",
     autoClose: 2000,
     hideProgressBar: false,
@@ -121,7 +127,7 @@ const Book = () => {
     progress: 0,
   });
 
-  const notifysum = () => toast.success("Successfully submitted", {
+  const notifySuccess = () => toast.success("Successfully submitted", {
     position: "top-center",
     autoClose: 3000,
     hideProgressBar: false,
@@ -132,17 +138,15 @@ const Book = () => {
   });
 
   const postUserData = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-
-    setUserData({ ...userData, [name]: value });
+    const { name, value } = event.target;
+    setUserData(prevState => ({ ...prevState, [name]: value }));
   };
 
   const formatDateToInput = (date) => {
     const day = String(date.getDate()).padStart(2, '0');
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const year = date.getFullYear();
-    return '${year}-${month}-${day}';
+    return `${year}-${month}-${day}`;
   };
 
   const handleStartDateChange = (event) => {
@@ -151,29 +155,39 @@ const Book = () => {
     let endDate = new Date(startDate);
     endDate.setMonth(startDate.getMonth() + 1);
 
-    // Handling end-of-month overflow
     if (endDate.getDate() !== startDate.getDate()) {
       endDate = new Date(endDate.getFullYear(), endDate.getMonth() + 1, 0);
     }
 
-    const formattedStartDate = formatDateToInput(startDate);
-    const formattedEndDate = formatDateToInput(endDate);
+    const formatDateToInput = (date) => {
+      const day = String(date.getDate()).padStart(2, '0');
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const year = date.getFullYear();
+      return `${year}-${month}-${day}`;
+    };
 
-    setUserData({ ...userData, startDate: formattedStartDate, endDate: formattedEndDate });
+    setUserData(prevState => ({
+      ...prevState,
+      startDate: formatDateToInput(startDate),
+      endDate: formatDateToInput(endDate)
+    }));
   };
 
   const submitData = async (event) => {
     event.preventDefault();
+
     const { name, lastName, email, phone, service, area, address, startDate, endDate, package: selectedPackage, agree } = userData;
 
     if (!name || !lastName || !email || !phone || !area || !address || !service || !startDate || !endDate || !selectedPackage || !agree) {
-      notify();
+      notifyError();
     } else {
       try {
-        const res = await fetch('/book-now', {
+        const token = localStorage.getItem('token');
+        const res = await fetch('http://localhost:8080/api/book-now', {
           method: "POST",
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
           },
           body: JSON.stringify({
             name, lastName, email, phone, service, area, address, startDate, endDate, package: selectedPackage
@@ -181,7 +195,7 @@ const Book = () => {
         });
 
         if (res.ok) {
-          notifysum();
+          notifySuccess();
           setUserData({
             name: "",
             lastName: "",
@@ -189,7 +203,6 @@ const Book = () => {
             phone: "",
             service: "",
             area: "",
-            //carrier:"",
             address: "",
             startDate: "",
             endDate: "",
@@ -197,17 +210,17 @@ const Book = () => {
             agree: false
           });
         } else {
-          notify();
+          notifyError();
         }
       } catch (err) {
-        console.log(err);
-        notify();
+        console.error("Error during submission:", err);
+        notifyError();
       }
     }
   };
 
   const handlePackageSelect = (pkg) => {
-    setUserData({ ...userData, package: pkg.name });
+    setUserData(prevState => ({ ...prevState, package: pkg.name }));
     setSelectedPackage(pkg);
     setShowPopup(false);
   };
@@ -250,7 +263,7 @@ const Book = () => {
             <div className="col-12 col-lg-10 mx-auto">
               <div className="row">
                 <div className="contact-rightside col-12 col-lg-12">
-                  <form method="POST" onSubmit={submitData}>
+                  <form onSubmit={submitData}>
                     <div className="row">
                       <div className="col-md-12" style={{ marginTop: "2rem", marginBottom: "3rem", color: "#121212" }}>
                         <h3>BOOK NOW</h3>
@@ -367,38 +380,14 @@ const Book = () => {
                           type="text"
                           className="form-control"
                           placeholder="Select a package"
-                          value={userData.package || "Select a package"}
+                          value={userData.package}
                           onClick={() => setShowPopup(true)}
-                          readOnly
+                          onChange={postUserData}
                           required
                         />
                       </div>
                     </div>
 
-                    {/* <div className="row">
-                      <div className="col-12 col-lg-4 contact-input-feild" style={{ marginTop: "-2.5rem", fontWeight: "bold" }}>
-                        <p style={{ fontSize: "20px", marginBottom: "0px", fontFamily: "poppins" }}>Carrier</p>
-                        <select
-                          className="form-control"
-                          name="carrier"
-                          value={userData.carrier}
-                          onChange={postUserData}
-                          required
-                        >
-                          <option value="">Select your carrier</option>
-                          <option value="txt.att.net">AT&T</option>
-                          <option value="vtext.com">Verizon</option>
-                          <option value="tmomail.net">T-Mobile</option>
-                          <option value="messaging.sprintpcs.com">Sprint</option>
-                          <option value="unknown">I don't know my carrier</option>
-                        </select>
-                        {userData.carrier === 'unknown' && (
-                          <div className="alert alert-info" style={{ marginTop: '10px' }}>
-                            You can find your carrier by checking your phone bill or contacting your phone provider.
-                          </div>
-                        )}
-                      </div>
-                        </div> */}
                     <div className="row">
                       <div className="col-12 contact-input-feild" style={{ marginTop: "-2.5rem", fontWeight: "bold" }}>
                         <p style={{ fontSize: "20px", marginBottom: "0px", fontFamily: "poppins" }}>Address</p>
@@ -421,7 +410,7 @@ const Book = () => {
                         name="agree"
                         checked={userData.agree}
                         id="flexCheckChecked"
-                        onChange={(e) => setUserData({ ...userData, agree: e.target.checked })}
+                        onChange={(e) => setUserData(prevState => ({ ...prevState, agree: e.target.checked }))}
                         required
                       />
                       <label className="form-check-label main-hero-para" style={{ color: "#121212", fontFamily: "poppins" }}>
@@ -440,9 +429,7 @@ const Book = () => {
                         padding: "0.5rem 0.5rem",
                         borderRadius: "5px",
                         fontSize: "16px",
-                        fontWeight: "bold",
-                        width:"1010px"
-              
+                        fontWeight: "bold"
                       }}
                       className="btn btn-dark"
                     >
